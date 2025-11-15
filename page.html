@@ -20,101 +20,402 @@
             padding: 1rem;
         }
         .container {
-            @apply w-full max-w-lg bg-[#161b22] p-8 md:p-10 rounded-xl shadow-2xl border border-gray-700;
+            width: 100%;
+            max-width: 32rem;
+            background-color: #161b22;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid #374151;
+        }
+        @media (min-width: 768px) {
+            .container {
+                padding: 2.5rem;
+            }
         }
         .input-field {
-            @apply w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg shadow-inner focus:ring-blue-500 focus:border-blue-500 transition duration-150;
+            /* Input fields are still w-full within their small container for a neat look */
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #3d444d;
+            color: white;
+            border: 1px solid #444c56;
+            border-radius: 0.5rem;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+            transition: border-color 0.15s, box-shadow 0.15s;
         }
+        .input-field:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        /* UPDATED: Changed color to cyan for better definition and added shadow-lg */
         .calc-button {
-            @apply w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow-md transition duration-200;
+            width: 100%;
+            background-color: #4595b0;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.2s;
+        }
+        .calc-button:hover {
+            background-color: #367a8f;
         }
         .back-button {
-            @apply bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200;
+            /* Centering back button */
+            background-color: #4595b0;
+            color: white;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
         }
+        .back-button:hover {
+            background-color: #367a8f;
+        }
+        .menu-row {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
         .menu-button {
-            @apply calc-button my-2 py-4 text-lg;
+            background-color: #4595b0;
+            color: white;
+            font-weight: 600;
+            padding: 0.5rem 0.75rem;
+            margin: 0.25rem;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            box-shadow: 0 6px 10px -3px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.15s, transform 0.06s;
+            width: auto;
+            min-width: 8.5rem;
         }
+        .menu-button:hover {
+            background-color: #367a8f;
+            transform: translateY(-1px);
+        }
+        /* New style for centering form content */
+        .centered-form-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .storage-display {
+            background-color: #1f2937;
+            border: 1px solid #4b5563;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            width: 100%;
+        }
+        .storage-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #374151;
+        }
+        .storage-item:last-child {
+            border-bottom: none;
+        }
+        .storage-label {
+            font-weight: 500;
+            color: #4595b0;
+        }
+        .storage-value {
+            font-family: monospace;
+            color: #22c55e;
+            font-weight: 600;
+        }
+        .storage-button {
+            background-color: #6b7280;
+            color: white;
+            border: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: background-color 0.2s;
+        }
+        .storage-button:hover {
+            background-color: #4b5563;
+        }
+        .save-result-button {
+            background-color: #8b5cf6;
+            color: white;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+        .save-result-button:hover {
+            background-color: #7c3aed;
+        }
+        /* Input row: label, input, button inline and wrapping */
+        .input-row {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .input-row label {
+            min-width: 9rem;
+            margin: 0;
+        }
+        .input-row .input-field {
+            flex: 1 1 10rem;
+            margin: 0;
+        }
+        .use-stored-button {
+            background-color: #10b981;
+            color: white;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.375rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.15s, transform 0.08s;
+            font-size: 0.75rem;
+            width: auto;
+            margin: 0;
+            white-space: nowrap;
+        }
+        .use-stored-button:active { transform: translateY(1px); }
+        .use-stored-button:hover { background-color: #059669; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1 id="main-title" class="text-3xl font-bold mb-4 text-center text-blue-400">AVP Equations</h1>
+        <h1 id="main-title" class="text-3xl font-bold mb-4 text-center" style="color: #4595b0;">AVP Equations</h1>
         <p class="text-center text-gray-400 mb-8">Engineering Calculation Tools</p>
+
+        <!-- Stored Values Display -->
+        <div id="storage-section" class="storage-display hidden">
+            <p class="text-sm font-semibold text-gray-300 mb-2">Stored Values:</p>
+            <div id="storage-list"></div>
+        </div>
 
         <!-- Main Menu View -->
         <div id="menu-view" class="view">
             <h2 class="text-xl font-semibold mb-6 text-center">Choose Which Equation to Use</h2>
-            <div class="space-y-4">
+            <div class="menu-row">
                 <button onclick="showView('CD_calc')" class="menu-button" id="CD_Eq">Calculate \(C_D\)</button>
                 <button onclick="showView('K_calc')" class="menu-button" id="K_Eq">Calculate \(K\)</button>
+                <button onclick="showView('AR_calc')" class="menu-button" id="AR_Eq">Calculate \(AR\)</button>
+                <button onclick="showView('Tropo_calc')" class="menu-button" id="Tropo_Eq">Troposphere</button>
+                <button onclick="showView('Strato_calc')" class="menu-button" id="Strato_Eq">Stratosphere</button>
+                <button onclick="showView('P_calc')" class="menu-button" id="P_Eq">Pressure (P)</button>
+                <button onclick="showView('a_calc')" class="menu-button" id="a_Eq">Speed of Sound (a)</button>
+                <button onclick="showView('M_calc')" class="menu-button" id="M_Eq">Mach (M)</button>
+                <button onclick="showView('L_calc')" class="menu-button" id="L_Eq">Lift (L)</button>
                 <button onclick="showView('CL_calc')" class="menu-button" id="CL_Eq">Calculate \(C_L\)</button>
-                <button onclick="showView('V_calc')" class="menu-button" id="V_Eq">Calculate Velocity (\(V\))</button>
+                <button onclick="showView('V_calc')" class="menu-button" id="V_Eq">Calculate Velocity \(V\)</button>
             </div>
         </div>
 
         <!-- CD Calculator View (CD = CDo + K * CL^2) -->
-        <div id="CD_calc" class="view hidden space-y-6">
+        <div id="CD_calc" class="view hidden space-y-6 centered-form-content">
             <h2 class="text-xl font-semibold text-center text-green-400">Calculate \(C_D\)</h2>
             <p class="text-center text-gray-400">
-                C_D = C_{D_0} + K * C_L^2
+                $$C_D = C_{D_0} + K \cdot C_L^2$$
             </p>
-            <form id="CD_form" onsubmit="event.preventDefault(); calculateCD()">
-                <div><label for="cdo-cd" class="block text-sm font-medium mb-1">\(C_{D_0}\)</label><input type="number" id="cdo-cd" step="any" required class="input-field"></div>
-                <div><label for="k-cd" class="block text-sm font-medium mb-1">\(K\)</label><input type="number" id="k-cd" step="any" required class="input-field"></div>
-                <div><label for="cl-cd" class="block text-sm font-medium mb-1">\(C_L\)</label><input type="number" id="cl-cd" step="any" required class="input-field"></div>
+            <!-- Form is constrained to max-w-sm to allow centering effect to be visible -->
+            <form id="CD_form" onsubmit="event.preventDefault(); calculateCD()" class="w-full max-w-xs space-y-4">
+                <!-- Input Group: Parasitic Drag Coefficient -->
+                <div class="w-full"><label for="cdo-cd" class="block text-sm font-medium mb-1">\(C_{D_0}\) (Parasitic Drag)</label><input type="number" id="cdo-cd" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('cdo-cd', 'C_D0')">Use Stored</button></div>
+                <!-- Input Group: Induced Drag Factor -->
+                <div class="w-full"><label for="k-cd" class="block text-sm font-medium mb-1">\(K\) (Induced Drag Factor)</label><input type="number" id="k-cd" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('k-cd', 'K')">Use Stored</button></div>
+                <!-- Input Group: Coefficient of Lift -->
+                <div class="w-full"><label for="cl-cd" class="block text-sm font-medium mb-1">\(C_L\) (Coefficient of Lift)</label><input type="number" id="cl-cd" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('cl-cd', 'C_L')">Use Stored</button></div>
+                <!-- Calculation Button -->
                 <button type="submit" class="calc-button">Calculate \(C_D\)</button>
             </form>
-            <div id="CD_result" class="result-box"></div>
+            <div id="CD_result" class="result-box w-full max-w-xs"></div>
+            <!-- Navigation Button -->
             <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
         </div>
 
-        <!-- K Calculator View (K = (CD - CDo) / CL^2) -->
-        <div id="K_calc" class="view hidden space-y-6">
+        <!-- K Calculator View (K = 1 / (π * e * AR)) -->
+        <div id="K_calc" class="view hidden space-y-6 centered-form-content">
             <h2 class="text-xl font-semibold text-center text-green-400">Calculate \(K\)</h2>
             <p class="text-center text-gray-400">
-                $$K = \frac{C_D - C_{D_0}}{C_L^2}$$
+                $$K = \frac{1}{\pi \cdot e \cdot AR}$$
             </p>
-            <form id="K_form" onsubmit="event.preventDefault(); calculateK()">
-                <div><label for="cd-k" class="block text-sm font-medium mb-1">\(C_D\)</label><input type="number" id="cd-k" step="any" required class="input-field"></div>
-                <div><label for="cdo-k" class="block text-sm font-medium mb-1">\(C_{D_0}\)</label><input type="number" id="cdo-k" step="any" required class="input-field"></div>
-                <div><label for="cl-k" class="block text-sm font-medium mb-1">\(C_L\)</label><input type="number" id="cl-k" step="any" required class="input-field"></div>
+            <form id="K_form" onsubmit="event.preventDefault(); calculateK()" class="w-full max-w-xs space-y-4">
+                <!-- Input Group: Oswald Efficiency Factor -->
+                <div class="w-full"><label for="e-k" class="block text-sm font-medium mb-1">\(e\) (Oswald Efficiency Factor)</label><input type="number" id="e-k" step="any" required class="input-field" placeholder="e.g., 0.9"><button type="button" class="use-stored-button" onclick="useStoredValue('e-k', 'e')">Use Stored</button></div>
+                <!-- Input Group: Aspect Ratio -->
+                <div class="w-full"><label for="ar-k" class="block text-sm font-medium mb-1">\(AR\) (Aspect Ratio)</label><input type="number" id="ar-k" step="any" required class="input-field" placeholder="e.g., 8.5"><button type="button" class="use-stored-button" onclick="useStoredValue('ar-k', 'AR')">Use Stored</button></div>
+                <!-- Calculation Button -->
                 <button type="submit" class="calc-button">Calculate \(K\)</button>
             </form>
-            <div id="K_result" class="result-box"></div>
+            <div id="K_result" class="result-box w-full max-w-xs"></div>
+            <!-- Navigation Button -->
+            <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
+        </div>
+
+        <!-- AR Calculator View (AR = b^2 / S) -->
+        <div id="AR_calc" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">Calculate \(AR\)</h2>
+            <p class="text-center text-gray-400">
+                $$AR = \frac{b^2}{S}$$
+            </p>
+            <form id="AR_form" onsubmit="event.preventDefault(); calculateAR()" class="w-full max-w-xs space-y-4">
+                <!-- Input Group: Wingspan -->
+                <div class="w-full"><label for="b-ar" class="block text-sm font-medium mb-1">\(b\) (Wingspan)</label><input type="number" id="b-ar" step="any" required class="input-field" placeholder="m or ft"><button type="button" class="use-stored-button" onclick="useStoredValue('b-ar', 'b')">Use Stored</button></div>
+                <!-- Input Group: Reference Area -->
+                <div class="w-full"><label for="s-ar" class="block text-sm font-medium mb-1">\(S\) (Reference Area)</label><input type="number" id="s-ar" step="any" required class="input-field" placeholder="m² or ft²"><button type="button" class="use-stored-button" onclick="useStoredValue('s-ar', 'S')">Use Stored</button></div>
+                <!-- Calculation Button -->
+                <button type="submit" class="calc-button">Calculate \(AR\)</button>
+            </form>
+            <div id="AR_result" class="result-box w-full max-w-xs"></div>
+            <!-- Navigation Button -->
             <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
         </div>
 
         <!-- CL Calculator View (CL = sqrt((CD - CDo) / K)) -->
-        <div id="CL_calc" class="view hidden space-y-6">
+        <div id="CL_calc" class="view hidden space-y-6 centered-form-content">
             <h2 class="text-xl font-semibold text-center text-green-400">Calculate \(C_L\)</h2>
             <p class="text-center text-gray-400">
                 $$C_L = \sqrt{\frac{C_D - C_{D_0}}{K}}$$
             </p>
-            <form id="CL_form" onsubmit="event.preventDefault(); calculateCL()">
-                <div><label for="cd-cl" class="block text-sm font-medium mb-1">\(C_D\)</label><input type="number" id="cd-cl" step="any" required class="input-field"></div>
-                <div><label for="cdo-cl" class="block text-sm font-medium mb-1">\(C_{D_0}\)</label><input type="number" id="cdo-cl" step="any" required class="input-field"></div>
-                <div><label for="k-cl" class="block text-sm font-medium mb-1">\(K\)</label><input type="number" id="k-cl" step="any" required class="input-field"></div>
+            <form id="CL_form" onsubmit="event.preventDefault(); calculateCL()" class="w-full max-w-xs space-y-4">
+                <!-- Input Group: Coefficient of Drag -->
+                <div class="w-full"><label for="cd-cl" class="block text-sm font-medium mb-1">\(C_D\)</label><input type="number" id="cd-cl" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('cd-cl', 'C_D')">Use Stored</button></div>
+                <!-- Input Group: Parasitic Drag Coefficient -->
+                <div class="w-full"><label for="cdo-cl" class="block text-sm font-medium mb-1">\(C_{D_0}\)</label><input type="number" id="cdo-cl" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('cdo-cl', 'C_D0')">Use Stored</button></div>
+                <!-- Input Group: Induced Drag Factor -->
+                <div class="w-full"><label for="k-cl" class="block text-sm font-medium mb-1">\(K\)</label><input type="number" id="k-cl" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('k-cl', 'K')">Use Stored</button></div>
+                <!-- Calculation Button -->
                 <button type="submit" class="calc-button">Calculate \(C_L\)</button>
             </form>
-            <div id="CL_result" class="result-box"></div>
+            <div id="CL_result" class="result-box w-full max-w-xs"></div>
+            <!-- Navigation Button -->
             <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
         </div>
 
         <!-- Velocity Calculator View (V = sqrt( (2*W) / (rho * S * CL) )) -->
-        <div id="V_calc" class="view hidden space-y-6">
+        <div id="V_calc" class="view hidden space-y-6 centered-form-content">
             <h2 class="text-xl font-semibold text-center text-green-400">Calculate Velocity (\(V\))</h2>
             <p class="text-center text-gray-400">
                 $$V = \sqrt{\frac{2 \cdot W}{\rho \cdot S \cdot C_L}}$$
             </p>
-            <form id="V_form" onsubmit="event.preventDefault(); calculateV()">
-                <div><label for="W-v" class="block text-sm font-medium mb-1">\(W\) (Weight/Lift Force)</label><input type="number" id="W-v" step="any" required class="input-field" placeholder="Newtons or lbs"></div>
-                <div><label for="rho-v" class="block text-sm font-medium mb-1">\(\rho\) (Air Density)</label><input type="number" id="rho-v" step="any" required class="input-field" placeholder="e.g., 1.225 kg/m^3"></div>
-                <div><label for="S-v" class="block text-sm font-medium mb-1">\(S\) (Reference Area)</label><input type="number" id="S-v" step="any" required class="input-field" placeholder="m^2 or ft^2"></div>
-                <div><label for="cl-v" class="block text-sm font-medium mb-1">\(C_L\) (Coefficient of Lift)</label><input type="number" id="cl-v" step="any" required class="input-field"></div>
+            <form id="V_form" onsubmit="event.preventDefault(); calculateV()" class="w-full max-w-xs space-y-4">
+                <!-- Input Group: Weight/Lift Force -->
+                <div class="w-full"><label for="W-v" class="block text-sm font-medium mb-1">\(W\) (Weight/Lift Force)</label><input type="number" id="W-v" step="any" required class="input-field" placeholder="Newtons or lbs"><button type="button" class="use-stored-button" onclick="useStoredValue('W-v', 'W')">Use Stored</button></div>
+                <!-- Input Group: Air Density -->
+                <div class="w-full"><label for="rho-v" class="block text-sm font-medium mb-1">\(\rho\) (Air Density)</label><input type="number" id="rho-v" step="any" required class="input-field" placeholder="e.g., 1.225 kg/m^3"><button type="button" class="use-stored-button" onclick="useStoredValue('rho-v', 'rho')">Use Stored</button></div>
+                <!-- Input Group: Reference Area -->
+                <div class="w-full"><label for="S-v" class="block text-sm font-medium mb-1">\(S\) (Reference Area)</label><input type="number" id="S-v" step="any" required class="input-field" placeholder="m^2 or ft^2"><button type="button" class="use-stored-button" onclick="useStoredValue('S-v', 'S')">Use Stored</button></div>
+                <!-- Input Group: Coefficient of Lift -->
+                <div class="w-full"><label for="cl-v" class="block text-sm font-medium mb-1">\(C_L\) (Coefficient of Lift)</label><input type="number" id="cl-v" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('cl-v', 'C_L')">Use Stored</button></div>
+                <!-- Calculation Button -->
                 <button type="submit" class="calc-button">Calculate \(V\)</button>
             </form>
-            <div id="V_result" class="result-box"></div>
+            <div id="V_result" class="result-box w-full max-w-xs"></div>
+            <!-- Navigation Button -->
+            <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
+        </div>
+
+        <!-- Troposphere Calculator View -->
+        <div id="Tropo_calc" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">Troposphere ISA</h2>
+            <p class="text-center text-gray-400">T_ISA = T_o - L · h<br>P / P_o = (T_ISA / T_o)^5.256</p>
+            <form id="Tropo_form" onsubmit="event.preventDefault(); calculateTropo()" class="w-full max-w-xs space-y-4">
+                <div class="w-full input-row"><label for="T0-t">\(T_o\) (Reference Temp)</label><input type="number" id="T0-t" step="any" required class="input-field" placeholder="e.g., 288.15"><button type="button" class="use-stored-button" onclick="useStoredValue('T0-t','T_o')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="L-t">\(L\) (Lapse Rate)</label><input type="number" id="L-t" step="any" required class="input-field" placeholder="e.g., 0.0065"><button type="button" class="use-stored-button" onclick="useStoredValue('L-t','L')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="h-t">\(h\) (Altitude)</label><input type="number" id="h-t" step="any" required class="input-field" placeholder="meters"><button type="button" class="use-stored-button" onclick="useStoredValue('h-t','h')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="P0-t">\(P_o\) (Reference Pressure, optional)</label><input type="number" id="P0-t" step="any" class="input-field" placeholder="e.g., 101325"><button type="button" class="use-stored-button" onclick="useStoredValue('P0-t','P_o')">Use Stored</button></div>
+                <button type="submit" class="calc-button">Calculate Troposphere</button>
+            </form>
+            <div id="Tropo_result" class="result-box w-full max-w-xs"></div>
+            <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
+        </div>
+
+        <!-- Stratosphere Calculator View -->
+        <div id="Strato_calc" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">Stratosphere ISA</h2>
+            <p class="text-center text-gray-400">T_ISA = -56<br>P / P_o = 0.2234 · exp((11000 - h)/6342)</p>
+            <form id="Strato_form" onsubmit="event.preventDefault(); calculateStrato()" class="w-full max-w-xs space-y-4">
+                <div class="w-full input-row"><label for="h-s">\(h\) (Altitude)</label><input type="number" id="h-s" step="any" required class="input-field" placeholder="meters"><button type="button" class="use-stored-button" onclick="useStoredValue('h-s','h')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="P0-s">\(P_o\) (Reference Pressure, optional)</label><input type="number" id="P0-s" step="any" class="input-field" placeholder="e.g., 101325"><button type="button" class="use-stored-button" onclick="useStoredValue('P0-s','P_o')">Use Stored</button></div>
+                <button type="submit" class="calc-button">Calculate Stratosphere</button>
+            </form>
+            <div id="Strato_result" class="result-box w-full max-w-xs"></div>
+            <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
+        </div>
+
+        <!-- Pressure Calculator View (P = rho * R * T) -->
+        <div id="P_calc" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">Pressure (Ideal Gas)</h2>
+            <p class="text-center text-gray-400">$$P = \rho R T$$</p>
+            <form id="P_form" onsubmit="event.preventDefault(); calculatePressure()" class="w-full max-w-xs space-y-4">
+                <div class="w-full input-row"><label for="rho-p">\(\rho\) (Density)</label><input type="number" id="rho-p" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('rho-p','rho')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="R-p">\(R\) (Specific Gas Constant)</label><input type="number" id="R-p" step="any" class="input-field" placeholder="default 287.058"><button type="button" class="use-stored-button" onclick="useStoredValue('R-p','R')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="T-p">\(T\) (Temperature)</label><input type="number" id="T-p" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('T-p','T')">Use Stored</button></div>
+                <button type="submit" class="calc-button">Calculate Pressure</button>
+            </form>
+            <div id="P_result" class="result-box w-full max-w-xs"></div>
+            <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
+        </div>
+
+        <!-- Speed of sound Calculator View (a = sqrt(gamma * R * T)) -->
+        <div id="a_calc" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">Speed of Sound (a)</h2>
+            <p class="text-center text-gray-400">$$a = \sqrt{\gamma R T}$$</p>
+            <form id="a_form" onsubmit="event.preventDefault(); calculateSpeedOfSound()" class="w-full max-w-xs space-y-4">
+                <div class="w-full input-row"><label for="gamma-a">\(\gamma\) (Ratio of specific heats)</label><input type="number" id="gamma-a" step="any" class="input-field" placeholder="default 1.4"><button type="button" class="use-stored-button" onclick="useStoredValue('gamma-a','gamma')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="R-a">\(R\) (Specific Gas Constant)</label><input type="number" id="R-a" step="any" class="input-field" placeholder="default 287.058"><button type="button" class="use-stored-button" onclick="useStoredValue('R-a','R')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="T-a">\(T\) (Temperature)</label><input type="number" id="T-a" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('T-a','T')">Use Stored</button></div>
+                <button type="submit" class="calc-button">Calculate a</button>
+            </form>
+            <div id="a_result" class="result-box w-full max-w-xs"></div>
+            <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
+        </div>
+
+        <!-- Mach Calculator View (M = V / a) -->
+        <div id="M_calc" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">Mach Number (M)</h2>
+            <p class="text-center text-gray-400">$$M = \frac{V}{a}$$</p>
+            <form id="M_form" onsubmit="event.preventDefault(); calculateMach()" class="w-full max-w-xs space-y-4">
+                <div class="w-full input-row"><label for="V-m">\(V\) (Velocity)</label><input type="number" id="V-m" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('V-m','V')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="a-m">\(a\) (Speed of Sound)</label><input type="number" id="a-m" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('a-m','a')">Use Stored</button></div>
+                <button type="submit" class="calc-button">Calculate Mach</button>
+            </form>
+            <div id="M_result" class="result-box w-full max-w-xs"></div>
+            <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
+        </div>
+
+        <!-- Lift Calculator View (L = 1/2 rho V^2 S C_L) -->
+        <div id="L_calc" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">Lift (L)</h2>
+            <p class="text-center text-gray-400">$$L = \tfrac{1}{2} \rho V^2 S C_L$$</p>
+            <form id="L_form" onsubmit="event.preventDefault(); calculateLift()" class="w-full max-w-xs space-y-4">
+                <div class="w-full input-row"><label for="rho-l">\(\rho\) (Density)</label><input type="number" id="rho-l" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('rho-l','rho')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="V-l">\(V\) (Velocity)</label><input type="number" id="V-l" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('V-l','V')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="S-l">\(S\) (Reference Area)</label><input type="number" id="S-l" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('S-l','S')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="cl-l">\(C_L\) (Coefficient of Lift)</label><input type="number" id="cl-l" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('cl-l','C_L')">Use Stored</button></div>
+                <button type="submit" class="calc-button">Calculate Lift</button>
+            </form>
+            <div id="L_result" class="result-box w-full max-w-xs"></div>
             <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
         </div>
     </div>
@@ -124,6 +425,46 @@
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" xintegrity="sha384-yW9E6G/rRjH1ZtBf/L+Y/Q2P5+M41R3U3z2fQjW4g2+5/Q5+4Q==" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
 
     <script>
+        // --- Storage Management ---
+        const storedValues = {};
+
+        function storeValue(name, value) {
+            storedValues[name] = parseFloat(value);
+            updateStorageDisplay();
+        }
+
+        function updateStorageDisplay() {
+            const storageSection = document.getElementById('storage-section');
+            const storageList = document.getElementById('storage-list');
+            
+            if (Object.keys(storedValues).length === 0) {
+                storageSection.classList.add('hidden');
+                return;
+            }
+            
+            storageSection.classList.remove('hidden');
+            storageList.innerHTML = Object.entries(storedValues).map(([name, value]) => `
+                <div class="storage-item">
+                    <span class="storage-label">${name}:</span>
+                    <span class="storage-value">${value.toFixed(5)}</span>
+                    <button class="storage-button" onclick="deleteStoredValue('${name}')">✕ Delete</button>
+                </div>
+            `).join('');
+        }
+
+        function deleteStoredValue(name) {
+            delete storedValues[name];
+            updateStorageDisplay();
+        }
+
+        function useStoredValue(inputId, variableName) {
+            if (storedValues[variableName] !== undefined) {
+                document.getElementById(inputId).value = storedValues[variableName];
+            } else {
+                alert(`Variable '${variableName}' not found in storage.`);
+            }
+        }
+
         // --- View Management ---
         function showView(viewId) {
             document.querySelectorAll('.view').forEach(view => {
@@ -145,7 +486,7 @@
             return parseFloat(document.getElementById(id).value);
         }
 
-        function displayResult(containerId, formula, value) {
+        function displayResult(containerId, formula, value, resultName = '') {
             const container = document.getElementById(containerId);
             if (isNaN(value) || !isFinite(value)) {
                  container.innerHTML = `<p class="text-red-500 mt-4 text-center">Error: Invalid input or result (e.g., division by zero or negative root).</p>`;
@@ -153,12 +494,17 @@
             }
 
             const formattedValue = value.toFixed(5);
+            let saveButton = '';
+            if (resultName) {
+                saveButton = `<button type="button" class="save-result-button" onclick="storeValue('${resultName}', ${value})">💾 Store ${resultName} = ${formattedValue}</button>`;
+            }
             container.innerHTML = `
-                <div class="mt-4 pt-4 border-t border-gray-600">
-                    <p class="text-lg font-medium text-gray-300 mb-2">Formula Used:</p>
+                <div class="mt-4 pt-4 border-t border-gray-600 w-full">
+                    <p class="text-lg font-medium text-gray-300 mb-2 text-center">Formula Used:</p>
                     <div class="text-xl font-mono text-white p-2 bg-gray-800 rounded-lg text-center">${formula}</div>
                     <p class="text-xl font-bold mt-4 text-center">Result:</p>
                     <div class="text-4xl font-extrabold text-green-400 bg-gray-800 p-4 rounded-lg text-center">${formattedValue}</div>
+                    ${saveButton}
                 </div>
             `;
             renderMathInElement(container);
@@ -173,20 +519,28 @@
             const CL = getVal('cl-cd');
 
             const CD = CDo + K * Math.pow(CL, 2);
-            displayResult('CD_result', `$$C_D = ${CDo} + ${K} \cdot ${CL}^2 = ${CD.toFixed(5)}$$`, CD);
+            displayResult('CD_result', `$$C_D = ${CDo} + ${K} \\cdot ${CL}^2 = ${CD.toFixed(5)}$$`, CD, 'C_D');
         }
 
-        // 2. Calculate K: K = (CD - CDo) / CL^2
+        // 2. Calculate K: K = 1 / (π * e * AR)
         function calculateK() {
-            const CD = getVal('cd-k');
-            const CDo = getVal('cdo-k');
-            const CL = getVal('cl-k');
+            const e = getVal('e-k');
+            const AR = getVal('ar-k');
 
-            const K = (CD - CDo) / Math.pow(CL, 2);
-            displayResult('K_result', `$$K = \\frac{${CD} - ${CDo}}{${CL}^2} = ${K.toFixed(5)}$$`, K);
+            const K = 1 / (Math.PI * e * AR);
+            displayResult('K_result', `$$K = \\frac{1}{\\pi \\cdot ${e} \\cdot ${AR}} = ${K.toFixed(5)}$$`, K, 'K');
         }
 
-        // 3. Calculate CL: CL = sqrt((CD - CDo) / K)
+        // 3. Calculate AR: AR = b^2 / S
+        function calculateAR() {
+            const b = getVal('b-ar');
+            const S = getVal('s-ar');
+
+            const AR = Math.pow(b, 2) / S;
+            displayResult('AR_result', `$$AR = \\frac{${b}^2}{${S}} = ${AR.toFixed(5)}$$`, AR, 'AR');
+        }
+
+        // 4. Calculate CL: CL = sqrt((CD - CDo) / K)
         function calculateCL() {
             const CD = getVal('cd-cl');
             const CDo = getVal('cdo-cl');
@@ -200,26 +554,127 @@
             }
 
             const CL = Math.sqrt(insideRoot);
-            displayResult('CL_result', `$$C_L = \\sqrt{\\frac{${CD} - ${CDo}}{${K}}} = ${CL.toFixed(5)}$$`, CL);
+            displayResult('CL_result', `$$C_L = \\sqrt{\\frac{${CD} - ${CDo}}{${K}}} = ${CL.toFixed(5)}$$`, CL, 'C_L');
         }
 
-        // 4. Calculate Velocity: V = sqrt( (2*W) / (rho * S * CL) )
+        // 5. Calculate Velocity: V = sqrt( (2*W) / (rho * S * CL) )
         function calculateV() {
             const W = getVal('W-v');
             const rho = getVal('rho-v');
             const S = getVal('S-v');
             const CL = getVal('cl-v');
 
+            if (isNaN(W) || isNaN(rho) || isNaN(S) || isNaN(CL)) {
+                displayResult('V_result', `$$V = \sqrt{\frac{2 \cdot W}{\rho \cdot S \cdot C_L}}$$`, NaN);
+                return;
+            }
+
             const denominator = rho * S * CL;
             const insideRoot = (2 * W) / denominator;
 
             if (denominator === 0 || insideRoot < 0) {
-                 displayResult('V_result', `$$V = \\sqrt{\\frac{2 \cdot ${W}}{${rho} \cdot ${S} \cdot ${CL}}}$$`, NaN); // Signal error
+                 displayResult('V_result', `$$V = \sqrt{\frac{2 \cdot ${W}}{${rho} \cdot ${S} \cdot ${CL}}}$$`, NaN); // Signal error
                  return;
             }
 
             const V = Math.sqrt(insideRoot);
-            displayResult('V_result', `$$V = \\sqrt{\\frac{2 \cdot ${W}}{${rho} \cdot ${S} \cdot ${CL}}} = ${V.toFixed(5)}$$`, V);
+            displayResult('V_result', `$$V = \sqrt{\frac{2 \cdot ${W}}{${rho} \cdot ${S} \cdot ${CL}}} = ${V.toFixed(5)}$$`, V, 'V');
+        }
+
+        // --- Atmosphere Calculations ---
+        // Troposphere: T_ISA = T_o - L*h ; P/P_o = (T_ISA/T_o)^5.256
+        function calculateTropo() {
+            const T0 = getVal('T0-t');
+            const L = getVal('L-t');
+            const h = getVal('h-t');
+            const P0 = parseFloat(document.getElementById('P0-t').value);
+
+            if (isNaN(T0) || isNaN(L) || isNaN(h)) {
+                displayResult('Tropo_result', `$$T_{ISA} = T_o - L \cdot h$$`, NaN);
+                return;
+            }
+
+            const T_ISA = T0 - L * h;
+            const P_ratio = Math.pow(T_ISA / T0, 5.256);
+            const P = !isNaN(P0) ? P0 * P_ratio : NaN;
+
+            let formula = `$$T_{ISA} = ${T0} - ${L} \cdot ${h} = ${T_ISA.toFixed(5)}$$`;
+            formula += `\\n$$\frac{P}{P_o} = \left(\frac{${T_ISA.toFixed(5)}}{${T0}}\right)^{5.256} = ${P_ratio.toFixed(5)}$$`;
+            if (!isNaN(P)) formula += `\\n$$P = ${P0} \cdot ${P_ratio.toFixed(5)} = ${P.toFixed(5)}$$`;
+
+            displayResult('Tropo_result', formula, T_ISA, 'T_ISA');
+            const container = document.getElementById('Tropo_result');
+            const pr = P_ratio;
+            const pText = !isNaN(P) ? `Pressure: ${P.toFixed(5)} (P/P_o = ${pr.toFixed(5)})` : `P/P_o = ${pr.toFixed(5)}`;
+            container.innerHTML += `<div class="mt-2 text-center text-gray-300">${pText}</div>`;
+        }
+
+        // Stratosphere: T_ISA = -56 ; P/P_o = 0.2234 * exp((11000 - h)/6342)
+        function calculateStrato() {
+            const h = getVal('h-s');
+            const P0 = parseFloat(document.getElementById('P0-s').value);
+
+            if (isNaN(h)) {
+                displayResult('Strato_result', `$$\frac{P}{P_o} = 0.2234 \cdot e^{\frac{11000 - h}{6342}}$$`, NaN);
+                return;
+            }
+
+            const T_ISA = -56;
+            const P_ratio = 0.2234 * Math.exp((11000 - h) / 6342);
+            const P = !isNaN(P0) ? P0 * P_ratio : NaN;
+
+            let formula = `$$T_{ISA} = -56 = ${T_ISA}$$`;
+            formula += `\\n$$\frac{P}{P_o} = 0.2234 \cdot e^{\\frac{11000 - ${h}}{6342}} = ${P_ratio.toFixed(5)}$$`;
+            if (!isNaN(P)) formula += `\\n$$P = ${P0} \cdot ${P_ratio.toFixed(5)} = ${P.toFixed(5)}$$`;
+
+            displayResult('Strato_result', formula, T_ISA, 'T_ISA');
+            const container = document.getElementById('Strato_result');
+            const pr = P_ratio;
+            const pText = !isNaN(P) ? `Pressure: ${P.toFixed(5)} (P/P_o = ${pr.toFixed(5)})` : `P/P_o = ${pr.toFixed(5)}`;
+            container.innerHTML += `<div class="mt-2 text-center text-gray-300">${pText}</div>`;
+        }
+
+        // --- Pressure, Speed of Sound, Mach, Lift ---
+        function calculatePressure() {
+            const rho = getVal('rho-p');
+            let R = getVal('R-p');
+            const T = getVal('T-p');
+            if (isNaN(rho) || isNaN(T)) {
+                displayResult('P_result', `$$P = \rho R T$$`, NaN);
+                return;
+            }
+            if (isNaN(R)) R = 287.058;
+            const P = rho * R * T;
+            displayResult('P_result', `$$P = ${rho} \\cdot ${R} \\cdot ${T} = ${P.toFixed(5)}$$`, P, 'P');
+        }
+
+        function calculateSpeedOfSound() {
+            let gamma = getVal('gamma-a');
+            let R = getVal('R-a');
+            const T = getVal('T-a');
+            if (isNaN(T)) { displayResult('a_result', `$$a = \\sqrt{\\gamma R T}$$`, NaN); return; }
+            if (isNaN(gamma)) gamma = 1.4;
+            if (isNaN(R)) R = 287.058;
+            const a = Math.sqrt(gamma * R * T);
+            displayResult('a_result', `$$a = \\sqrt{${gamma} \\cdot ${R} \\cdot ${T}} = ${a.toFixed(5)}$$`, a, 'a');
+        }
+
+        function calculateMach() {
+            const V = getVal('V-m');
+            const a = getVal('a-m');
+            if (isNaN(V) || isNaN(a) || a === 0) { displayResult('M_result', `$$M = V / a$$`, NaN); return; }
+            const M = V / a;
+            displayResult('M_result', `$$M = \\frac{${V}}{${a}} = ${M.toFixed(5)}$$`, M, 'M');
+        }
+
+        function calculateLift() {
+            const rho = getVal('rho-l');
+            const V = getVal('V-l');
+            const S = getVal('S-l');
+            const CL = getVal('cl-l');
+            if (isNaN(rho) || isNaN(V) || isNaN(S) || isNaN(CL)) { displayResult('L_result', `$$L = \tfrac{1}{2} \rho V^2 S C_L$$`, NaN); return; }
+            const L = 0.5 * rho * Math.pow(V, 2) * S * CL;
+            displayResult('L_result', `$$L = \tfrac{1}{2} \\cdot ${rho} \\cdot ${V}^2 \\cdot ${S} \\cdot ${CL} = ${L.toFixed(5)}$$`, L, 'L');
         }
 
         // --- KaTeX Configuration ---
