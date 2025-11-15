@@ -207,38 +207,54 @@
 <body>
 
     <div class="container">
-                <!-- Range/Endurance Section -->
-                <section id="range-endurance" class="mb-12">
-                    <h2 class="text-2xl font-bold text-blue-400 mb-4 text-center">Range & Endurance Equations</h2>
-                    <div class="bg-gray-800 rounded-lg p-6 mb-6 shadow">
-                        <h3 class="text-lg font-semibold text-blue-300 mb-2">Specific Fuel Consumption (SFC)</h3>
-                        <p class="mb-2 text-gray-300">SFC is a measure of the fuel efficiency of an engine design, typically defined as:</p>
-                        <p class="text-green-300 text-center text-xl mb-4">$$SFC = \frac{\dot{m}_f}{T}$$</p>
-                        <ul class="text-gray-400 mb-4">
-                            <li>\(\dot{m}_f\): Fuel mass flow rate (kg/s)</li>
-                            <li>\(T\): Thrust (N)</li>
-                        </ul>
-                    </div>
-                    <div class="bg-gray-800 rounded-lg p-6 shadow">
-                        <h3 class="text-lg font-semibold text-blue-300 mb-2">Specific Range (SR)</h3>
-                        <p class="mb-2 text-gray-300">SR is the distance an aircraft can travel per unit of fuel consumed:</p>
-                        <p class="text-green-300 text-center text-xl mb-4">$$SR = \frac{V \cdot L}{SFC \cdot D \cdot W}$$</p>
-                        <ul class="text-gray-400 mb-4">
-                            <li>\(V\): Velocity (m/s)</li>
-                            <li>\(L\): Lift (N)</li>
-                            <li>\(SFC\): Specific Fuel Consumption (kg/(N·s))</li>
-                            <li>\(D\): Drag (N)</li>
-                            <li>\(W\): Weight (N)</li>
-                        </ul>
-                    </div>
-                </section
         <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 1rem;">
             <h1 id="main-title" class="text-3xl font-bold text-center" style="color: #4595b0; margin: 0;">AVP Equations</h1>
         </div>
-        <div style="display:flex; justify-content:center; margin-bottom:2rem;">
-            <a href="#range-endurance" class="cta-button" style="width:100%; max-width:18rem;">Range/Endurance</a>
-        </div>
         <p class="text-center text-gray-400 mb-8">Engineering Calculation Tools</p>
+        <!-- Range/Endurance Menu (shows links to SFC and SR views) -->
+        <div id="range-endurance" class="view hidden mb-12">
+            <h2 class="text-2xl font-bold text-blue-400 mb-4 text-center">Range & Endurance</h2>
+            <div class="menu-row" style="justify-content:center; margin-bottom:1rem;">
+                <button onclick="showView('SFC_view')" class="menu-button">Specific Fuel Consumption (SFC)</button>
+                <button onclick="showView('SR_view')" class="menu-button">Specific Range (SR)</button>
+            </div>
+            <div style="display:flex; justify-content:center;">
+                <button onclick="showView('menu-view')" class="back-button" style="width:auto;">← Back to Main Menu</button>
+            </div>
+        </div>
+
+        <!-- SFC view (dedicated page within page.html) -->
+        <div id="SFC_view" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">Calculate SFC</h2>
+            <p class="text-center text-gray-400">
+                $$SFC = \frac{\dot{m}_f}{T}$$
+            </p>
+            <form id="SFC_form" onsubmit="event.preventDefault(); calculateSFC()" class="w-full max-w-xs space-y-4">
+                    <div class="w-full"><label for="mdotf-sfc" class="block text-sm font-medium mb-1">\(\dot{m}_f\) (Fuel mass flow rate, kg/s)</label><input type="number" id="mdotf-sfc" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('mdotf-sfc', 'mdotf')">Use Stored</button></div>
+                    <div class="w-full"><label for="T-sfc" class="block text-sm font-medium mb-1">\(T\) (Thrust, N)</label><input type="number" id="T-sfc" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('T-sfc', 'T')">Use Stored</button></div>
+                    <button type="submit" class="calc-button">Calculate SFC</button>
+                </form>
+            <div id="SFC_result" class="result-box w-full max-w-xs"></div>
+            <button onclick="showView('range-endurance')" class="back-button">← Back to Range/Endurance</button>
+        </div>
+
+        <!-- SR view (dedicated page within page.html) -->
+        <div id="SR_view" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">Calculate SR</h2>
+            <p class="text-center text-gray-400">
+                $$SR = \frac{V \cdot L}{SFC \cdot D \cdot W}$$
+            </p>
+            <form id="SR_form" onsubmit="event.preventDefault(); calculateSR()" class="w-full max-w-xs space-y-4">
+                    <div class="w-full"><label for="V-sr" class="block text-sm font-medium mb-1">\(V\) (Velocity, m/s)</label><input type="number" id="V-sr" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('V-sr', 'V')">Use Stored</button></div>
+                    <div class="w-full"><label for="L-sr" class="block text-sm font-medium mb-1">\(L\) (Lift, N)</label><input type="number" id="L-sr" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('L-sr', 'L')">Use Stored</button></div>
+                    <div class="w-full"><label for="SFC-sr" class="block text-sm font-medium mb-1">SFC (kg/(N·s))</label><input type="number" id="SFC-sr" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('SFC-sr', 'SFC')">Use Stored</button></div>
+                    <div class="w-full"><label for="D-sr" class="block text-sm font-medium mb-1">\(D\) (Drag, N)</label><input type="number" id="D-sr" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('D-sr', 'D')">Use Stored</button></div>
+                    <div class="w-full"><label for="W-sr" class="block text-sm font-medium mb-1">\(W\) (Weight, N)</label><input type="number" id="W-sr" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('W-sr', 'W')">Use Stored</button></div>
+                    <button type="submit" class="calc-button">Calculate SR</button>
+                </form>
+            <div id="SR_result" class="result-box w-full max-w-xs"></div>
+            <button onclick="showView('range-endurance')" class="back-button">← Back to Range/Endurance</button>
+        </div>
 
         <!-- Stored Values Display -->
         <div id="storage-section" class="storage-display hidden">
@@ -255,6 +271,7 @@
                 <button onclick="showView('prop-menu')" class="menu-button">Propeller</button>
                 <button onclick="showView('jet-menu')" class="menu-button">Jet Engine</button>
                 <button onclick="showView('rocket-menu')" class="menu-button">Rocket Engine</button>
+                <button onclick="showView('range-endurance')" class="menu-button">Range/Endurance</button>
             </div>
             <div style="display:flex; justify-content:center; margin-top:1rem;">
                 <a href="index.html" class="back-button" style="width:auto;">← Back to Home</a>
@@ -277,8 +294,7 @@
                 <button onclick="showView('CLmax_calc')" class="menu-button">C_L@max</button>
                 <button onclick="showView('CDmax_calc')" class="menu-button">C_D@max</button>
                 <button onclick="showView('Vmin_calc')" class="menu-button">V_min</button>
-                <button onclick="showView('SFC_calc')" class="menu-button">SFC</button>
-                <button onclick="showView('SR_calc')" class="menu-button">Range (SR)</button>
+                <!-- SFC and SR buttons removed from Aerodynamic submenu -->
             </div>
             <button onclick="showView('menu-view')" class="back-button" style="width:auto; margin-top:1rem;">← Back to Main Menu</button>
         </div>
