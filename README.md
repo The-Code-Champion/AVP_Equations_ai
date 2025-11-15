@@ -1,2 +1,2 @@
 # AVP_Equations_ai
-equations for classes
+equations for classes using AI
