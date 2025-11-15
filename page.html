@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVP Equations Calculator</title>
+    <!-- Load KaTeX CSS for equation rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" xintegrity="sha384-GvrF9Q88p0+dK4xOaW5h+6bQkL13U0N3x+0Q2+5bQ2+1w==" crossorigin="anonymous">
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        .container {
+            @apply w-full max-w-lg bg-[#161b22] p-8 md:p-10 rounded-xl shadow-2xl border border-gray-700;
+        }
+        .input-field {
+            @apply w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg shadow-inner focus:ring-blue-500 focus:border-blue-500 transition duration-150;
+        }
+        .calc-button {
+            @apply w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow-md transition duration-200;
+        }
+        .back-button {
+            @apply bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200;
+        }
+        .menu-button {
+            @apply calc-button my-2 py-4 text-lg;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 id="main-title" class="text-3xl font-bold mb-4 text-center text-blue-400">AVP Equations</h1>
+        <p class="text-center text-gray-400 mb-8">Engineering Calculation Tools</p>
+
+        <!-- Main Menu View -->
+        <div id="menu-view" class="view">
+            <h2 class="text-xl font-semibold mb-6 text-center">Choose Which Equation to Use</h2>
+            <div class="space-y-4">
+                <button onclick="showView('CD_calc')" class="menu-button" id="CD_Eq">Calculate \(C_D\)</button>
+                <button onclick="showView('K_calc')" class="menu-button" id="K_Eq">Calculate \(K\)</button>
+                <button onclick="showView('CL_calc')" class="menu-button" id="CL_Eq">Calculate \(C_L\)</button>
+                <button onclick="showView('V_calc')" class="menu-button" id="V_Eq">Calculate Velocity (\(V\))</button>
+            </div>
+        </div>
+
+        <!-- CD Calculator View (CD = CDo + K * CL^2) -->
+        <div id="CD_calc" class="view hidden space-y-6">
+            <h2 class="text-xl font-semibold text-center text-green-400">Calculate \(C_D\)</h2>
+            <p class="text-center text-gray-400">
+                C_D = C_{D_0} + K * C_L^2
+            </p>
+            <form id="CD_form" onsubmit="event.preventDefault(); calculateCD()">
+                <div><label for="cdo-cd" class="block text-sm font-medium mb-1">\(C_{D_0}\)</label><input type="number" id="cdo-cd" step="any" required class="input-field"></div>
+                <div><label for="k-cd" class="block text-sm font-medium mb-1">\(K\)</label><input type="number" id="k-cd" step="any" required class="input-field"></div>
+                <div><label for="cl-cd" class="block text-sm font-medium mb-1">\(C_L\)</label><input type="number" id="cl-cd" step="any" required class="input-field"></div>
+                <button type="submit" class="calc-button">Calculate \(C_D\)</button>
+            </form>
+            <div id="CD_result" class="result-box"></div>
+            <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
+        </div>
+
+        <!-- K Calculator View (K = (CD - CDo) / CL^2) -->
+        <div id="K_calc" class="view hidden space-y-6">
+            <h2 class="text-xl font-semibold text-center text-green-400">Calculate \(K\)</h2>
+            <p class="text-center text-gray-400">
+                $$K = \frac{C_D - C_{D_0}}{C_L^2}$$
+            </p>
+            <form id="K_form" onsubmit="event.preventDefault(); calculateK()">
+                <div><label for="cd-k" class="block text-sm font-medium mb-1">\(C_D\)</label><input type="number" id="cd-k" step="any" required class="input-field"></div>
+                <div><label for="cdo-k" class="block text-sm font-medium mb-1">\(C_{D_0}\)</label><input type="number" id="cdo-k" step="any" required class="input-field"></div>
+                <div><label for="cl-k" class="block text-sm font-medium mb-1">\(C_L\)</label><input type="number" id="cl-k" step="any" required class="input-field"></div>
+                <button type="submit" class="calc-button">Calculate \(K\)</button>
+            </form>
+            <div id="K_result" class="result-box"></div>
+            <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
+        </div>
+
+        <!-- CL Calculator View (CL = sqrt((CD - CDo) / K)) -->
+        <div id="CL_calc" class="view hidden space-y-6">
+            <h2 class="text-xl font-semibold text-center text-green-400">Calculate \(C_L\)</h2>
+            <p class="text-center text-gray-400">
+                $$C_L = \sqrt{\frac{C_D - C_{D_0}}{K}}$$
+            </p>
+            <form id="CL_form" onsubmit="event.preventDefault(); calculateCL()">
+                <div><label for="cd-cl" class="block text-sm font-medium mb-1">\(C_D\)</label><input type="number" id="cd-cl" step="any" required class="input-field"></div>
+                <div><label for="cdo-cl" class="block text-sm font-medium mb-1">\(C_{D_0}\)</label><input type="number" id="cdo-cl" step="any" required class="input-field"></div>
+                <div><label for="k-cl" class="block text-sm font-medium mb-1">\(K\)</label><input type="number" id="k-cl" step="any" required class="input-field"></div>
+                <button type="submit" class="calc-button">Calculate \(C_L\)</button>
+            </form>
+            <div id="CL_result" class="result-box"></div>
+            <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
+        </div>
+
+        <!-- Velocity Calculator View (V = sqrt( (2*W) / (rho * S * CL) )) -->
+        <div id="V_calc" class="view hidden space-y-6">
+            <h2 class="text-xl font-semibold text-center text-green-400">Calculate Velocity (\(V\))</h2>
+            <p class="text-center text-gray-400">
+                $$V = \sqrt{\frac{2 \cdot W}{\rho \cdot S \cdot C_L}}$$
+            </p>
+            <form id="V_form" onsubmit="event.preventDefault(); calculateV()">
+                <div><label for="W-v" class="block text-sm font-medium mb-1">\(W\) (Weight/Lift Force)</label><input type="number" id="W-v" step="any" required class="input-field" placeholder="Newtons or lbs"></div>
+                <div><label for="rho-v" class="block text-sm font-medium mb-1">\(\rho\) (Air Density)</label><input type="number" id="rho-v" step="any" required class="input-field" placeholder="e.g., 1.225 kg/m^3"></div>
+                <div><label for="S-v" class="block text-sm font-medium mb-1">\(S\) (Reference Area)</label><input type="number" id="S-v" step="any" required class="input-field" placeholder="m^2 or ft^2"></div>
+                <div><label for="cl-v" class="block text-sm font-medium mb-1">\(C_L\) (Coefficient of Lift)</label><input type="number" id="cl-v" step="any" required class="input-field"></div>
+                <button type="submit" class="calc-button">Calculate \(V\)</button>
+            </form>
+            <div id="V_result" class="result-box"></div>
+            <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
+        </div>
+    </div>
+
+    <!-- 2. Load KaTeX JS and auto-render extension -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" xintegrity="sha384-fVEdC95A7M49uY+0Q/jO95t/K39xU+9d+o0+o5O9M3XQj8j3h2X6X4g2+5/Q5+4Q==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" xintegrity="sha384-yW9E6G/rRjH1ZtBf/L+Y/Q2P5+M41R3U3z2fQjW4g2+5/Q5+4Q==" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+    <script>
+        // --- View Management ---
+        function showView(viewId) {
+            document.querySelectorAll('.view').forEach(view => {
+                view.classList.add('hidden');
+            });
+            document.getElementById(viewId).classList.remove('hidden');
+            // Re-render math when a new view is shown (important for KaTeX)
+            renderMathInElement(document.getElementById(viewId)); 
+            document.getElementById('main-title').textContent = viewId === 'menu-view' ? 'AVP Equations' : 'Calculation Tool';
+        }
+
+        // Initialize the first view
+        document.addEventListener('DOMContentLoaded', () => {
+            showView('menu-view');
+        });
+
+        // --- Helper Function ---
+        function getVal(id) {
+            return parseFloat(document.getElementById(id).value);
+        }
+
+        function displayResult(containerId, formula, value) {
+            const container = document.getElementById(containerId);
+            if (isNaN(value) || !isFinite(value)) {
+                 container.innerHTML = `<p class="text-red-500 mt-4 text-center">Error: Invalid input or result (e.g., division by zero or negative root).</p>`;
+                 return;
+            }
+
+            const formattedValue = value.toFixed(5);
+            container.innerHTML = `
+                <div class="mt-4 pt-4 border-t border-gray-600">
+                    <p class="text-lg font-medium text-gray-300 mb-2">Formula Used:</p>
+                    <div class="text-xl font-mono text-white p-2 bg-gray-800 rounded-lg text-center">${formula}</div>
+                    <p class="text-xl font-bold mt-4 text-center">Result:</p>
+                    <div class="text-4xl font-extrabold text-green-400 bg-gray-800 p-4 rounded-lg text-center">${formattedValue}</div>
+                </div>
+            `;
+            renderMathInElement(container);
+        }
+
+        // --- Calculation Functions ---
+
+        // 1. Calculate CD: CD = CDo + K * CL^2
+        function calculateCD() {
+            const CDo = getVal('cdo-cd');
+            const K = getVal('k-cd');
+            const CL = getVal('cl-cd');
+
+            const CD = CDo + K * Math.pow(CL, 2);
+            displayResult('CD_result', `$$C_D = ${CDo} + ${K} \cdot ${CL}^2 = ${CD.toFixed(5)}$$`, CD);
+        }
+
+        // 2. Calculate K: K = (CD - CDo) / CL^2
+        function calculateK() {
+            const CD = getVal('cd-k');
+            const CDo = getVal('cdo-k');
+            const CL = getVal('cl-k');
+
+            const K = (CD - CDo) / Math.pow(CL, 2);
+            displayResult('K_result', `$$K = \\frac{${CD} - ${CDo}}{${CL}^2} = ${K.toFixed(5)}$$`, K);
+        }
+
+        // 3. Calculate CL: CL = sqrt((CD - CDo) / K)
+        function calculateCL() {
+            const CD = getVal('cd-cl');
+            const CDo = getVal('cdo-cl');
+            const K = getVal('k-cl');
+
+            const insideRoot = (CD - CDo) / K;
+            
+            if (insideRoot < 0) {
+                 displayResult('CL_result', `$$C_L = \\sqrt{\\frac{${CD} - ${CDo}}{${K}}}$$`, NaN); // Signal error
+                 return;
+            }
+
+            const CL = Math.sqrt(insideRoot);
+            displayResult('CL_result', `$$C_L = \\sqrt{\\frac{${CD} - ${CDo}}{${K}}} = ${CL.toFixed(5)}$$`, CL);
+        }
+
+        // 4. Calculate Velocity: V = sqrt( (2*W) / (rho * S * CL) )
+        function calculateV() {
+            const W = getVal('W-v');
+            const rho = getVal('rho-v');
+            const S = getVal('S-v');
+            const CL = getVal('cl-v');
+
+            const denominator = rho * S * CL;
+            const insideRoot = (2 * W) / denominator;
+
+            if (denominator === 0 || insideRoot < 0) {
+                 displayResult('V_result', `$$V = \\sqrt{\\frac{2 \cdot ${W}}{${rho} \cdot ${S} \cdot ${CL}}}$$`, NaN); // Signal error
+                 return;
+            }
+
+            const V = Math.sqrt(insideRoot);
+            displayResult('V_result', `$$V = \\sqrt{\\frac{2 \cdot ${W}}{${rho} \cdot ${S} \cdot ${CL}}} = ${V.toFixed(5)}$$`, V);
+        }
+
+        // --- KaTeX Configuration ---
+        function renderMathInElement(element) {
+            if (window.renderMathInElement) {
+                window.renderMathInElement(element, {
+                    delimiters: [
+                        {left: "$$", right: "$$", display: true},
+                        {left: "\\(", right: "\\)", display: false},
+                    ],
+                    throwOnError: false
+                });
+            }
+        }
+
+        // Initial render after all resources are loaded
+        window.addEventListener('load', () => {
+             renderMathInElement(document.body);
+        });
+    </script>
+
+</body>
+</html>
