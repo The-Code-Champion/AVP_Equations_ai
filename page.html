@@ -207,8 +207,36 @@
 <body>
 
     <div class="container">
+                <!-- Range/Endurance Section -->
+                <section id="range-endurance" class="mb-12">
+                    <h2 class="text-2xl font-bold text-blue-400 mb-4 text-center">Range & Endurance Equations</h2>
+                    <div class="bg-gray-800 rounded-lg p-6 mb-6 shadow">
+                        <h3 class="text-lg font-semibold text-blue-300 mb-2">Specific Fuel Consumption (SFC)</h3>
+                        <p class="mb-2 text-gray-300">SFC is a measure of the fuel efficiency of an engine design, typically defined as:</p>
+                        <p class="text-green-300 text-center text-xl mb-4">$$SFC = \frac{\dot{m}_f}{T}$$</p>
+                        <ul class="text-gray-400 mb-4">
+                            <li>\(\dot{m}_f\): Fuel mass flow rate (kg/s)</li>
+                            <li>\(T\): Thrust (N)</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-800 rounded-lg p-6 shadow">
+                        <h3 class="text-lg font-semibold text-blue-300 mb-2">Specific Range (SR)</h3>
+                        <p class="mb-2 text-gray-300">SR is the distance an aircraft can travel per unit of fuel consumed:</p>
+                        <p class="text-green-300 text-center text-xl mb-4">$$SR = \frac{V \cdot L}{SFC \cdot D \cdot W}$$</p>
+                        <ul class="text-gray-400 mb-4">
+                            <li>\(V\): Velocity (m/s)</li>
+                            <li>\(L\): Lift (N)</li>
+                            <li>\(SFC\): Specific Fuel Consumption (kg/(N·s))</li>
+                            <li>\(D\): Drag (N)</li>
+                            <li>\(W\): Weight (N)</li>
+                        </ul>
+                    </div>
+                </section
         <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 1rem;">
             <h1 id="main-title" class="text-3xl font-bold text-center" style="color: #4595b0; margin: 0;">AVP Equations</h1>
+        </div>
+        <div style="display:flex; justify-content:center; margin-bottom:2rem;">
+            <a href="#range-endurance" class="cta-button" style="width:100%; max-width:18rem;">Range/Endurance</a>
         </div>
         <p class="text-center text-gray-400 mb-8">Engineering Calculation Tools</p>
 
@@ -245,6 +273,12 @@
                 <button onclick="showView('L_calc')" class="menu-button">Lift (L)</button>
                 <button onclick="showView('q_calc')" class="menu-button">Dynamic Pressure (q)</button>
                 <button onclick="showView('D_calc')" class="menu-button">Drag (D)</button>
+                <button onclick="showView('LDmax_calc')" class="menu-button">(L/D)_max</button>
+                <button onclick="showView('CLmax_calc')" class="menu-button">C_L@max</button>
+                <button onclick="showView('CDmax_calc')" class="menu-button">C_D@max</button>
+                <button onclick="showView('Vmin_calc')" class="menu-button">V_min</button>
+                <button onclick="showView('SFC_calc')" class="menu-button">SFC</button>
+                <button onclick="showView('SR_calc')" class="menu-button">Range (SR)</button>
             </div>
             <button onclick="showView('menu-view')" class="back-button" style="width:auto; margin-top:1rem;">← Back to Main Menu</button>
         </div>
@@ -510,6 +544,152 @@
                 <button type="submit" class="calc-button">Calculate D</button>
             </form>
             <div id="D_result" class="result-box w-full max-w-xs"></div>
+            <button onclick="showView('aero-menu')" class="back-button">← Back to Aerodynamic</button>
+        </div>
+
+        <!-- (L/D)_max Calculator View -->
+        <div id="LDmax_calc" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">Max Lift-to-Drag Ratio</h2>
+            <p class="text-center text-gray-400">$$(L/D)_{max} = \frac{1}{2\sqrt{K \cdot C_{D_0}}}$$</p>
+            <form id="LDmax_form" onsubmit="event.preventDefault(); calculateLDmax()" class="w-full max-w-xs space-y-4">
+                <div class="input-row">
+                    <label for="K-ldmax" class="text-sm font-semibold text-gray-300">K:</label>
+                    <input type="number" id="K-ldmax" class="input-field" placeholder="K" step="any"/>
+                    <button type="button" onclick="useStoredValue('K-ldmax', 'K')" class="use-stored-button">Use Stored</button>
+                </div>
+                <div class="input-row">
+                    <label for="CDo-ldmax" class="text-sm font-semibold text-gray-300">C_D0:</label>
+                    <input type="number" id="CDo-ldmax" class="input-field" placeholder="C_D0" step="any"/>
+                    <button type="button" onclick="useStoredValue('CDo-ldmax', 'CDo')" class="use-stored-button">Use Stored</button>
+                </div>
+                <button type="submit" class="calc-button">Calculate</button>
+            </form>
+            <div id="LDmax_result" class="result-box w-full max-w-xs"></div>
+            <button onclick="showView('aero-menu')" class="back-button">← Back to Aerodynamic</button>
+        </div>
+
+        <!-- C_L at (L/D)_max Calculator View -->
+        <div id="CLmax_calc" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">C_L at Max Efficiency</h2>
+            <p class="text-center text-gray-400">$$C_L = \sqrt{\frac{C_{D_0}}{K}}$$</p>
+            <form id="CLmax_form" onsubmit="event.preventDefault(); calculateCLmax()" class="w-full max-w-xs space-y-4">
+                <div class="input-row">
+                    <label for="CDo-clmax" class="text-sm font-semibold text-gray-300">C_D0:</label>
+                    <input type="number" id="CDo-clmax" class="input-field" placeholder="C_D0" step="any"/>
+                    <button type="button" onclick="useStoredValue('CDo-clmax', 'CDo')" class="use-stored-button">Use Stored</button>
+                </div>
+                <div class="input-row">
+                    <label for="K-clmax" class="text-sm font-semibold text-gray-300">K:</label>
+                    <input type="number" id="K-clmax" class="input-field" placeholder="K" step="any"/>
+                    <button type="button" onclick="useStoredValue('K-clmax', 'K')" class="use-stored-button">Use Stored</button>
+                </div>
+                <button type="submit" class="calc-button">Calculate</button>
+            </form>
+            <div id="CLmax_result" class="result-box w-full max-w-xs"></div>
+            <button onclick="showView('aero-menu')" class="back-button">← Back to Aerodynamic</button>
+        </div>
+
+        <!-- C_D at (L/D)_max Calculator View -->
+        <div id="CDmax_calc" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">C_D at Max Efficiency</h2>
+            <p class="text-center text-gray-400">$$C_D = 2 \cdot C_{D_0}$$</p>
+            <form id="CDmax_form" onsubmit="event.preventDefault(); calculateCDmax()" class="w-full max-w-xs space-y-4">
+                <div class="input-row">
+                    <label for="CDo-cdmax" class="text-sm font-semibold text-gray-300">C_D0:</label>
+                    <input type="number" id="CDo-cdmax" class="input-field" placeholder="C_D0" step="any"/>
+                    <button type="button" onclick="useStoredValue('CDo-cdmax', 'CDo')" class="use-stored-button">Use Stored</button>
+                </div>
+                <button type="submit" class="calc-button">Calculate</button>
+            </form>
+            <div id="CDmax_result" class="result-box w-full max-w-xs"></div>
+            <button onclick="showView('aero-menu')" class="back-button">← Back to Aerodynamic</button>
+        </div>
+
+        <!-- V_min Calculator View -->
+        <div id="Vmin_calc" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">Minimum Velocity (V_min)</h2>
+            <p class="text-center text-gray-400">$$V_{min} = \sqrt{\frac{2W}{\rho S C_L}}$$</p>
+            <form id="Vmin_form" onsubmit="event.preventDefault(); calculateVmin()" class="w-full max-w-xs space-y-4">
+                <div class="input-row">
+                    <label for="W-vmin" class="text-sm font-semibold text-gray-300">W (Weight):</label>
+                    <input type="number" id="W-vmin" class="input-field" placeholder="Weight (N)" step="any"/>
+                    <button type="button" onclick="useStoredValue('W-vmin', 'W')" class="use-stored-button">Use Stored</button>
+                </div>
+                <div class="input-row">
+                    <label for="rho-vmin" class="text-sm font-semibold text-gray-300">ρ:</label>
+                    <input type="number" id="rho-vmin" class="input-field" placeholder="Density (kg/m³)" step="any"/>
+                    <button type="button" onclick="useStoredValue('rho-vmin', 'rho')" class="use-stored-button">Use Stored</button>
+                </div>
+                <div class="input-row">
+                    <label for="S-vmin" class="text-sm font-semibold text-gray-300">S:</label>
+                    <input type="number" id="S-vmin" class="input-field" placeholder="Wing Area (m²)" step="any"/>
+                    <button type="button" onclick="useStoredValue('S-vmin', 'S')" class="use-stored-button">Use Stored</button>
+                </div>
+                <div class="input-row">
+                    <label for="CL-vmin" class="text-sm font-semibold text-gray-300">C_L:</label>
+                    <input type="number" id="CL-vmin" class="input-field" placeholder="C_L" step="any"/>
+                    <button type="button" onclick="useStoredValue('CL-vmin', 'CL')" class="use-stored-button">Use Stored</button>
+                </div>
+                <button type="submit" class="calc-button">Calculate</button>
+            </form>
+            <div id="Vmin_result" class="result-box w-full max-w-xs"></div>
+            <button onclick="showView('aero-menu')" class="back-button">← Back to Aerodynamic</button>
+        </div>
+
+        <!-- SFC Calculator View -->
+        <div id="SFC_calc" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">Specific Fuel Consumption</h2>
+            <p class="text-center text-gray-400">$$SFC = \frac{\dot{m}_f}{T}$$</p>
+            <form id="SFC_form" onsubmit="event.preventDefault(); calculateSFC()" class="w-full max-w-xs space-y-4">
+                <div class="input-row">
+                    <label for="mdotf-sfc" class="text-sm font-semibold text-gray-300">ṁ_f:</label>
+                    <input type="number" id="mdotf-sfc" class="input-field" placeholder="Fuel Mass Flow (kg/s)" step="any"/>
+                    <button type="button" onclick="useStoredValue('mdotf-sfc', 'mdotf')" class="use-stored-button">Use Stored</button>
+                </div>
+                <div class="input-row">
+                    <label for="T-sfc" class="text-sm font-semibold text-gray-300">T (Thrust):</label>
+                    <input type="number" id="T-sfc" class="input-field" placeholder="Thrust (N)" step="any"/>
+                    <button type="button" onclick="useStoredValue('T-sfc', 'T')" class="use-stored-button">Use Stored</button>
+                </div>
+                <button type="submit" class="calc-button">Calculate</button>
+            </form>
+            <div id="SFC_result" class="result-box w-full max-w-xs"></div>
+            <button onclick="showView('aero-menu')" class="back-button">← Back to Aerodynamic</button>
+        </div>
+
+        <!-- Range (SR) Calculator View -->
+        <div id="SR_calc" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">Range / Endurance</h2>
+            <p class="text-center text-gray-400">$$SR = \frac{V \cdot L}{SFC \cdot D \cdot W}$$</p>
+            <form id="SR_form" onsubmit="event.preventDefault(); calculateSR()" class="w-full max-w-xs space-y-4">
+                <div class="input-row">
+                    <label for="V-sr" class="text-sm font-semibold text-gray-300">V:</label>
+                    <input type="number" id="V-sr" class="input-field" placeholder="Velocity (m/s)" step="any"/>
+                    <button type="button" onclick="useStoredValue('V-sr', 'V')" class="use-stored-button">Use Stored</button>
+                </div>
+                <div class="input-row">
+                    <label for="L-sr" class="text-sm font-semibold text-gray-300">L (Lift):</label>
+                    <input type="number" id="L-sr" class="input-field" placeholder="Lift (N)" step="any"/>
+                    <button type="button" onclick="useStoredValue('L-sr', 'L')" class="use-stored-button">Use Stored</button>
+                </div>
+                <div class="input-row">
+                    <label for="SFC-sr" class="text-sm font-semibold text-gray-300">SFC:</label>
+                    <input type="number" id="SFC-sr" class="input-field" placeholder="SFC (kg/(N·s))" step="any"/>
+                    <button type="button" onclick="useStoredValue('SFC-sr', 'SFC')" class="use-stored-button">Use Stored</button>
+                </div>
+                <div class="input-row">
+                    <label for="D-sr" class="text-sm font-semibold text-gray-300">D (Drag):</label>
+                    <input type="number" id="D-sr" class="input-field" placeholder="Drag (N)" step="any"/>
+                    <button type="button" onclick="useStoredValue('D-sr', 'D')" class="use-stored-button">Use Stored</button>
+                </div>
+                <div class="input-row">
+                    <label for="W-sr" class="text-sm font-semibold text-gray-300">W (Weight):</label>
+                    <input type="number" id="W-sr" class="input-field" placeholder="Weight (N)" step="any"/>
+                    <button type="button" onclick="useStoredValue('W-sr', 'W')" class="use-stored-button">Use Stored</button>
+                </div>
+                <button type="submit" class="calc-button">Calculate</button>
+            </form>
+            <div id="SR_result" class="result-box w-full max-w-xs"></div>
             <button onclick="showView('aero-menu')" class="back-button">← Back to Aerodynamic</button>
         </div>
 
@@ -1112,6 +1292,59 @@
             const CF = Math.sqrt(part1 * part2 * part3);
             
             displayResult('CF_result', `$$C_F = \\sqrt{\\left(\\frac{2\\gamma}{\\gamma-1}\\right)^2 \\left(\\frac{2}{\\gamma+1}\\right)^{\\frac{\\gamma+1}{\\gamma-1}} \\left(1-\\frac{P_{exit}}{P_{chamber}}\\right)^{\\frac{\\gamma-1}{\\gamma}}} = ${CF.toFixed(5)}$$`, CF, 'C_F');
+        }
+
+        // --- Level Flight Equations ---
+        function calculateLDmax() {
+            const K = getVal('K-ldmax');
+            const CDo = getVal('CDo-ldmax');
+            if (isNaN(K) || isNaN(CDo) || K === 0 || CDo === 0) { displayResult('LDmax_result', `$$(L/D)_{max} = \\frac{1}{2\\sqrt{K \\cdot C_{D_0}}}$$`, NaN); return; }
+            const LDmax = 1 / (2 * Math.sqrt(K * CDo));
+            displayResult('LDmax_result', `$$(L/D)_{max} = \\frac{1}{2\\sqrt{${K} \\cdot ${CDo}}} = ${LDmax.toFixed(5)}$$`, LDmax, 'LDmax');
+        }
+
+        function calculateCLmax() {
+            const CDo = getVal('CDo-clmax');
+            const K = getVal('K-clmax');
+            if (isNaN(CDo) || isNaN(K) || K === 0) { displayResult('CLmax_result', `$$C_L = \\sqrt{\\frac{C_{D_0}}{K}}$$`, NaN); return; }
+            const CLmax = Math.sqrt(CDo / K);
+            displayResult('CLmax_result', `$$C_L = \\sqrt{\\frac{${CDo}}{${K}}} = ${CLmax.toFixed(5)}$$`, CLmax, 'CLmax');
+        }
+
+        function calculateCDmax() {
+            const CDo = getVal('CDo-cdmax');
+            if (isNaN(CDo)) { displayResult('CDmax_result', `$$C_D = 2 \\cdot C_{D_0}$$`, NaN); return; }
+            const CDmax = 2 * CDo;
+            displayResult('CDmax_result', `$$C_D = 2 \\cdot ${CDo} = ${CDmax.toFixed(5)}$$`, CDmax, 'CDmax');
+        }
+
+        function calculateVmin() {
+            const W = getVal('W-vmin');
+            const rho = getVal('rho-vmin');
+            const S = getVal('S-vmin');
+            const CL = getVal('CL-vmin');
+            if (isNaN(W) || isNaN(rho) || isNaN(S) || isNaN(CL) || rho === 0 || S === 0 || CL === 0) { displayResult('Vmin_result', `$$V_{min} = \\sqrt{\\frac{2W}{\\rho S C_L}}$$`, NaN); return; }
+            const Vmin = Math.sqrt((2 * W) / (rho * S * CL));
+            displayResult('Vmin_result', `$$V_{min} = \\sqrt{\\frac{2 \\cdot ${W}}{${rho} \\cdot ${S} \\cdot ${CL}}} = ${Vmin.toFixed(5)}\\text{ m/s}$$`, Vmin, 'Vmin');
+        }
+
+        function calculateSFC() {
+            const mdotf = getVal('mdotf-sfc');
+            const T = getVal('T-sfc');
+            if (isNaN(mdotf) || isNaN(T) || T === 0) { displayResult('SFC_result', `$$SFC = \\frac{\\dot{m}_f}{T}$$`, NaN); return; }
+            const SFC = mdotf / T;
+            displayResult('SFC_result', `$$SFC = \\frac{${mdotf}}{${T}} = ${SFC.toFixed(6)}\\text{ kg/(N·s)}$$`, SFC, 'SFC');
+        }
+
+        function calculateSR() {
+            const V = getVal('V-sr');
+            const L = getVal('L-sr');
+            const SFC = getVal('SFC-sr');
+            const D = getVal('D-sr');
+            const W = getVal('W-sr');
+            if (isNaN(V) || isNaN(L) || isNaN(SFC) || isNaN(D) || isNaN(W) || SFC === 0 || D === 0 || W === 0) { displayResult('SR_result', `$$SR = \\frac{V \\cdot L}{SFC \\cdot D \\cdot W}$$`, NaN); return; }
+            const SR = (V * L) / (SFC * D * W);
+            displayResult('SR_result', `$$SR = \\frac{${V} \\cdot ${L}}{${SFC} \\cdot ${D} \\cdot ${W}} = ${SR.toFixed(5)}$$`, SR, 'SR');
         }
 
         // --- KaTeX Configuration ---
