@@ -66,19 +66,22 @@
             background-color: #367a8f;
         }
         .back-button {
-            /* Centering back button */
-            background-color: #4595b0;
-            color: white;
+            /* Transparent back button: no solid background */
+            background-color: transparent;
+            color: #4595b0;
             font-weight: 600;
             padding: 0.5rem 1rem;
             border-radius: 0.5rem;
             border: none;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: background-color 0.2s, color 0.15s;
+            box-shadow: none;
         }
         .back-button:hover {
-            background-color: #367a8f;
+            background-color: rgba(54,122,143,0.08);
+            color: #367a8f;
         }
+        /* (Home link moved into menu view) */
         .menu-row {
             display: flex;
             gap: 0.5rem;
@@ -204,10 +207,8 @@
 <body>
 
     <div class="container">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-            <a href="index.html" class="back-button" style="margin: 0;">← Back to Home</a>
-            <h1 id="main-title" class="text-3xl font-bold text-center" style="color: #4595b0; flex: 1; margin: 0;">AVP Equations</h1>
-            <div style="width: 120px;"></div>
+        <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 1rem;">
+            <h1 id="main-title" class="text-3xl font-bold text-center" style="color: #4595b0; margin: 0;">AVP Equations</h1>
         </div>
         <p class="text-center text-gray-400 mb-8">Engineering Calculation Tools</p>
 
@@ -232,6 +233,9 @@
                 <button onclick="showView('L_calc')" class="menu-button" id="L_Eq">Lift (L)</button>
                 <button onclick="showView('CL_calc')" class="menu-button" id="CL_Eq">Calculate \(C_L\)</button>
                 <button onclick="showView('V_calc')" class="menu-button" id="V_Eq">Calculate Velocity \(V\)</button>
+            </div>
+            <div style="display:flex; justify-content:center; margin-top:1rem;">
+                <a href="index.html" class="back-button" style="width:auto;">← Back to Home</a>
             </div>
         </div>
 
@@ -478,6 +482,7 @@
             // Re-render math when a new view is shown (important for KaTeX)
             renderMathInElement(document.getElementById(viewId)); 
             document.getElementById('main-title').textContent = viewId === 'menu-view' ? 'AVP Equations' : 'Calculation Tool';
+            // No explicit home-link toggle needed; home button lives inside the menu view
         }
 
         // Initialize the first view
