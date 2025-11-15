@@ -220,23 +220,78 @@
 
         <!-- Main Menu View -->
         <div id="menu-view" class="view">
-            <h2 class="text-xl font-semibold mb-6 text-center">Choose Which Equation to Use</h2>
+            <h2 class="text-xl font-semibold mb-6 text-center">Choose Calculation Category</h2>
             <div class="menu-row">
-                <button onclick="showView('CD_calc')" class="menu-button" id="CD_Eq">Calculate \(C_D\)</button>
-                <button onclick="showView('K_calc')" class="menu-button" id="K_Eq">Calculate \(K\)</button>
-                <button onclick="showView('AR_calc')" class="menu-button" id="AR_Eq">Calculate \(AR\)</button>
-                <button onclick="showView('Tropo_calc')" class="menu-button" id="Tropo_Eq">Troposphere</button>
-                <button onclick="showView('Strato_calc')" class="menu-button" id="Strato_Eq">Stratosphere</button>
-                <button onclick="showView('P_calc')" class="menu-button" id="P_Eq">Pressure (P)</button>
-                <button onclick="showView('a_calc')" class="menu-button" id="a_Eq">Speed of Sound (a)</button>
-                <button onclick="showView('M_calc')" class="menu-button" id="M_Eq">Mach (M)</button>
-                <button onclick="showView('L_calc')" class="menu-button" id="L_Eq">Lift (L)</button>
-                <button onclick="showView('CL_calc')" class="menu-button" id="CL_Eq">Calculate \(C_L\)</button>
-                <button onclick="showView('V_calc')" class="menu-button" id="V_Eq">Calculate Velocity \(V\)</button>
+                <button onclick="showView('aero-menu')" class="menu-button">Aerodynamic</button>
+                <button onclick="showView('atmos-menu')" class="menu-button">Atmosphere</button>
+                <button onclick="showView('prop-menu')" class="menu-button">Propeller</button>
+                <button onclick="showView('jet-menu')" class="menu-button">Jet Engine</button>
+                <button onclick="showView('rocket-menu')" class="menu-button">Rocket Engine</button>
             </div>
             <div style="display:flex; justify-content:center; margin-top:1rem;">
                 <a href="index.html" class="back-button" style="width:auto;">← Back to Home</a>
             </div>
+        </div>
+
+        <!-- ===== AERODYNAMIC SUB-MENU ===== -->
+        <div id="aero-menu" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold mb-6 text-center">Aerodynamic Calculations</h2>
+            <div class="menu-row">
+                <button onclick="showView('CD_calc')" class="menu-button">Calculate \(C_D\)</button>
+                <button onclick="showView('K_calc')" class="menu-button">Calculate \(K\)</button>
+                <button onclick="showView('AR_calc')" class="menu-button">Calculate \(AR\)</button>
+                <button onclick="showView('CL_calc')" class="menu-button">Calculate \(C_L\)</button>
+                <button onclick="showView('V_calc')" class="menu-button">Velocity \(V\)</button>
+                <button onclick="showView('L_calc')" class="menu-button">Lift (L)</button>
+                <button onclick="showView('q_calc')" class="menu-button">Dynamic Pressure (q)</button>
+                <button onclick="showView('D_calc')" class="menu-button">Drag (D)</button>
+            </div>
+            <button onclick="showView('menu-view')" class="back-button" style="width:auto; margin-top:1rem;">← Back to Main Menu</button>
+        </div>
+
+        <!-- ===== ATMOSPHERE SUB-MENU ===== -->
+        <div id="atmos-menu" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold mb-6 text-center">Atmospheric Calculations</h2>
+            <div class="menu-row">
+                <button onclick="showView('Tropo_calc')" class="menu-button">Troposphere</button>
+                <button onclick="showView('Strato_calc')" class="menu-button">Stratosphere</button>
+                <button onclick="showView('P_calc')" class="menu-button">Pressure (P)</button>
+                <button onclick="showView('a_calc')" class="menu-button">Speed of Sound (a)</button>
+                <button onclick="showView('M_calc')" class="menu-button">Mach (M)</button>
+            </div>
+            <button onclick="showView('menu-view')" class="back-button" style="width:auto; margin-top:1rem;">← Back to Main Menu</button>
+        </div>
+
+        <!-- ===== PROPELLER SUB-MENU ===== -->
+        <div id="prop-menu" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold mb-6 text-center">Propeller Engine Calculations</h2>
+            <div class="menu-row">
+                <button onclick="showView('eta_p_calc')" class="menu-button">Prop Efficiency (\(\eta_p\))</button>
+                <button onclick="showView('P_prop_calc')" class="menu-button">Prop Power (P)</button>
+                   <button onclick="showView('T_prop_calc')" class="menu-button">Prop Thrust (T)</button>
+            </div>
+            <button onclick="showView('menu-view')" class="back-button" style="width:auto; margin-top:1rem;">← Back to Main Menu</button>
+        </div>
+
+        <!-- ===== JET SUB-MENU ===== -->
+        <div id="jet-menu" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold mb-6 text-center">Jet Engine Calculations</h2>
+            <div class="menu-row">
+                <button onclick="showView('T_jet_calc')" class="menu-button">Jet Thrust (T)</button>
+                <button onclick="showView('T_jet_alt_calc')" class="menu-button">Jet Thrust Alt (T)</button>
+            </div>
+            <button onclick="showView('menu-view')" class="back-button" style="width:auto; margin-top:1rem;">← Back to Main Menu</button>
+        </div>
+
+        <!-- ===== ROCKET SUB-MENU ===== -->
+        <div id="rocket-menu" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold mb-6 text-center">Rocket Engine Calculations</h2>
+            <div class="menu-row">
+                <button onclick="showView('T_rocket_calc')" class="menu-button">Rocket Thrust (T)</button>
+                <button onclick="showView('T_rocket_chamber_calc')" class="menu-button">Rocket Chamber (T)</button>
+                <button onclick="showView('CF_calc')" class="menu-button">Discharge Coeff (\(C_F\))</button>
+            </div>
+            <button onclick="showView('menu-view')" class="back-button" style="width:auto; margin-top:1rem;">← Back to Main Menu</button>
         </div>
 
         <!-- CD Calculator View (CD = CDo + K * CL^2) -->
@@ -258,7 +313,7 @@
             </form>
             <div id="CD_result" class="result-box w-full max-w-xs"></div>
             <!-- Navigation Button -->
-            <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
+            <button onclick="showView('aero-menu')" class="back-button">← Back to Aerodynamic</button>
         </div>
 
         <!-- K Calculator View (K = 1 / (π * e * AR)) -->
@@ -277,7 +332,7 @@
             </form>
             <div id="K_result" class="result-box w-full max-w-xs"></div>
             <!-- Navigation Button -->
-            <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
+            <button onclick="showView('aero-menu')" class="back-button">← Back to Aerodynamic</button>
         </div>
 
         <!-- AR Calculator View (AR = b^2 / S) -->
@@ -296,7 +351,7 @@
             </form>
             <div id="AR_result" class="result-box w-full max-w-xs"></div>
             <!-- Navigation Button -->
-            <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
+            <button onclick="showView('aero-menu')" class="back-button">← Back to Aerodynamic</button>
         </div>
 
         <!-- CL Calculator View (CL = sqrt((CD - CDo) / K)) -->
@@ -317,7 +372,7 @@
             </form>
             <div id="CL_result" class="result-box w-full max-w-xs"></div>
             <!-- Navigation Button -->
-            <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
+            <button onclick="showView('aero-menu')" class="back-button">← Back to Aerodynamic</button>
         </div>
 
         <!-- Velocity Calculator View (V = sqrt( (2*W) / (rho * S * CL) )) -->
@@ -340,7 +395,7 @@
             </form>
             <div id="V_result" class="result-box w-full max-w-xs"></div>
             <!-- Navigation Button -->
-            <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
+            <button onclick="showView('aero-menu')" class="back-button">← Back to Aerodynamic</button>
         </div>
 
         <!-- Troposphere Calculator View -->
@@ -355,7 +410,7 @@
                 <button type="submit" class="calc-button">Calculate Troposphere</button>
             </form>
             <div id="Tropo_result" class="result-box w-full max-w-xs"></div>
-            <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
+            <button onclick="showView('atmos-menu')" class="back-button">← Back to Atmosphere</button>
         </div>
 
         <!-- Stratosphere Calculator View -->
@@ -368,7 +423,7 @@
                 <button type="submit" class="calc-button">Calculate Stratosphere</button>
             </form>
             <div id="Strato_result" class="result-box w-full max-w-xs"></div>
-            <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
+            <button onclick="showView('atmos-menu')" class="back-button">← Back to Atmosphere</button>
         </div>
 
         <!-- Pressure Calculator View (P = rho * R * T) -->
@@ -382,7 +437,7 @@
                 <button type="submit" class="calc-button">Calculate Pressure</button>
             </form>
             <div id="P_result" class="result-box w-full max-w-xs"></div>
-            <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
+            <button onclick="showView('atmos-menu')" class="back-button">← Back to Atmosphere</button>
         </div>
 
         <!-- Speed of sound Calculator View (a = sqrt(gamma * R * T)) -->
@@ -396,7 +451,7 @@
                 <button type="submit" class="calc-button">Calculate a</button>
             </form>
             <div id="a_result" class="result-box w-full max-w-xs"></div>
-            <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
+            <button onclick="showView('atmos-menu')" class="back-button">← Back to Atmosphere</button>
         </div>
 
         <!-- Mach Calculator View (M = V / a) -->
@@ -409,7 +464,7 @@
                 <button type="submit" class="calc-button">Calculate Mach</button>
             </form>
             <div id="M_result" class="result-box w-full max-w-xs"></div>
-            <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
+            <button onclick="showView('atmos-menu')" class="back-button">← Back to Atmosphere</button>
         </div>
 
         <!-- Lift Calculator View (L = 1/2 rho V^2 S C_L) -->
@@ -424,7 +479,153 @@
                 <button type="submit" class="calc-button">Calculate Lift</button>
             </form>
             <div id="L_result" class="result-box w-full max-w-xs"></div>
-            <button onclick="showView('menu-view')" class="back-button">← Back to Menu</button>
+            <button onclick="showView('aero-menu')" class="back-button">← Back to Aerodynamic</button>
+        </div>
+
+        <!-- Dynamic Pressure Calculator View (q = 1/2 * rho * V^2) -->
+        <div id="q_calc" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">Dynamic Pressure (q)</h2>
+            <p class="text-center text-gray-400">$$q = \tfrac{1}{2} \rho V^2$$</p>
+            <form id="q_form" onsubmit="event.preventDefault(); calculateDynamicPressure()" class="w-full max-w-xs space-y-4">
+                <div class="w-full input-row"><label for="rho-q">\(\rho\) (Density)</label><input type="number" id="rho-q" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('rho-q','rho')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="V-q">\(V\) (Velocity)</label><input type="number" id="V-q" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('V-q','V')">Use Stored</button></div>
+                <button type="submit" class="calc-button">Calculate q</button>
+            </form>
+            <div id="q_result" class="result-box w-full max-w-xs"></div>
+            <button onclick="showView('aero-menu')" class="back-button">← Back to Aerodynamic</button>
+        </div>
+
+        <!-- Drag Calculator View (D = 1/2 * rho * V^2 * S * C_D) -->
+        <div id="D_calc" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">Drag (D)</h2>
+            <p class="text-center text-gray-400">$$D = \tfrac{1}{2} \rho V^2 S C_D$$</p>
+            <form id="D_form" onsubmit="event.preventDefault(); calculateDrag()" class="w-full max-w-xs space-y-4">
+                <div class="w-full input-row"><label for="rho-d">\(\rho\) (Density)</label><input type="number" id="rho-d" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('rho-d','rho')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="V-d">\(V\) (Velocity)</label><input type="number" id="V-d" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('V-d','V')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="S-d">\(S\) (Reference Area)</label><input type="number" id="S-d" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('S-d','S')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="CD-d">\(C_D\) (Drag Coefficient)</label><input type="number" id="CD-d" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('CD-d','C_D')">Use Stored</button></div>
+                <button type="submit" class="calc-button">Calculate D</button>
+            </form>
+            <div id="D_result" class="result-box w-full max-w-xs"></div>
+            <button onclick="showView('aero-menu')" class="back-button">← Back to Aerodynamic</button>
+        </div>
+
+        <!-- Propeller Efficiency Calculator View (eta_p = T*V / P_shaft) -->
+        <div id="eta_p_calc" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">Propeller Efficiency (\(\eta_p\))</h2>
+            <p class="text-center text-gray-400">$$\eta_p = \frac{T \cdot V}{P_{shaft}}$$</p>
+            <form id="eta_p_form" onsubmit="event.preventDefault(); calculatePropEfficiency()" class="w-full max-w-xs space-y-4">
+                <div class="w-full input-row"><label for="T-eta">\(T\) (Thrust)</label><input type="number" id="T-eta" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('T-eta','T')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="V-eta">\(V\) (Velocity)</label><input type="number" id="V-eta" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('V-eta','V')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="P-eta">\(P_{shaft}\) (Shaft Power)</label><input type="number" id="P-eta" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('P-eta','P_shaft')">Use Stored</button></div>
+                <button type="submit" class="calc-button">Calculate \(\eta_p\)</button>
+            </form>
+            <div id="eta_p_result" class="result-box w-full max-w-xs"></div>
+            <button onclick="showView('prop-menu')" class="back-button">← Back to Propeller</button>
+        </div>
+
+           <!-- Propeller Thrust Calculator View (T = eta_p * P_shaft / V) -->
+           <div id="T_prop_calc" class="view hidden space-y-6 centered-form-content">
+               <h2 class="text-xl font-semibold text-center text-green-400">Propeller Thrust (T)</h2>
+               <p class="text-center text-gray-400">Derived from $$\eta_p = \frac{T \cdot V}{P_{shaft}}$$ solving for T: $$T = \frac{\eta_p \cdot P_{shaft}}{V}$$</p>
+               <form id="T_prop_form" onsubmit="event.preventDefault(); calculatePropThrust()" class="w-full max-w-xs space-y-4">
+                   <div class="w-full input-row"><label for="eta-prop">\(\eta_p\) (Propeller Efficiency)</label><input type="number" id="eta-prop" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('eta-prop','eta_p')">Use Stored</button></div>
+                   <div class="w-full input-row"><label for="Pshaft-prop">\(P_{shaft}\) (Shaft Power)</label><input type="number" id="Pshaft-prop" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('Pshaft-prop','P_shaft')">Use Stored</button></div>
+                   <div class="w-full input-row"><label for="V-prop">\(V\) (Velocity)</label><input type="number" id="V-prop" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('V-prop','V')">Use Stored</button></div>
+                   <button type="submit" class="calc-button">Calculate T</button>
+               </form>
+               <div id="T_prop_result" class="result-box w-full max-w-xs"></div>
+               <button onclick="showView('prop-menu')" class="back-button">← Back to Propeller</button>
+           </div>
+
+        <!-- Jet Thrust Calculator View (T = Mdot*(V_exit - V_inlet) + A_exit(P_exit - P_ambient)) -->
+        <div id="T_jet_calc" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">Jet Thrust (T)</h2>
+            <p class="text-center text-gray-400">$$T = \dot{m}(V_{exit} - V_{inlet}) + A_{exit}(P_{exit} - P_{ambient})$$</p>
+            <form id="T_jet_form" onsubmit="event.preventDefault(); calculateJetThrust()" class="w-full max-w-xs space-y-4">
+                <div class="w-full input-row"><label for="mdot-jet">\(\dot{m}\) (Mass Flow Rate)</label><input type="number" id="mdot-jet" step="any" required class="input-field" placeholder="kg/s"><button type="button" class="use-stored-button" onclick="useStoredValue('mdot-jet','mdot')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="Vexit-jet">\(V_{exit}\) (Exit Velocity)</label><input type="number" id="Vexit-jet" step="any" required class="input-field" placeholder="m/s"><button type="button" class="use-stored-button" onclick="useStoredValue('Vexit-jet','V_exit')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="Vinlet-jet">\(V_{inlet}\) (Inlet Velocity)</label><input type="number" id="Vinlet-jet" step="any" required class="input-field" placeholder="m/s"><button type="button" class="use-stored-button" onclick="useStoredValue('Vinlet-jet','V_inlet')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="Aexit-jet">\(A_{exit}\) (Exit Area)</label><input type="number" id="Aexit-jet" step="any" class="input-field" placeholder="m² (optional)"><button type="button" class="use-stored-button" onclick="useStoredValue('Aexit-jet','A_exit')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="Pexit-jet">\(P_{exit}\) (Exit Pressure)</label><input type="number" id="Pexit-jet" step="any" class="input-field" placeholder="Pa (optional)"><button type="button" class="use-stored-button" onclick="useStoredValue('Pexit-jet','P_exit')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="Pamb-jet">\(P_{ambient}\) (Ambient Pressure)</label><input type="number" id="Pamb-jet" step="any" class="input-field" placeholder="Pa (optional)"><button type="button" class="use-stored-button" onclick="useStoredValue('Pamb-jet','P_ambient')">Use Stored</button></div>
+                <button type="submit" class="calc-button">Calculate Jet Thrust</button>
+            </form>
+            <div id="T_jet_result" class="result-box w-full max-w-xs"></div>
+            <button onclick="showView('jet-menu')" class="back-button">← Back to Jet Engine</button>
+        </div>
+
+        <!-- Rocket Thrust Calculator View (T = Mdot*V_exit + A_exit(P_exit - P_ambient)) -->
+        <div id="T_rocket_calc" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">Rocket Thrust (T)</h2>
+            <p class="text-center text-gray-400">$$T = \dot{m} V_{exit} + A_{exit}(P_{exit} - P_{ambient})$$</p>
+            <form id="T_rocket_form" onsubmit="event.preventDefault(); calculateRocketThrust()" class="w-full max-w-xs space-y-4">
+                <div class="w-full input-row"><label for="mdot-rocket">\(\dot{m}\) (Mass Flow Rate)</label><input type="number" id="mdot-rocket" step="any" required class="input-field" placeholder="kg/s"><button type="button" class="use-stored-button" onclick="useStoredValue('mdot-rocket','mdot')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="Vexit-rocket">\(V_{exit}\) (Exit Velocity)</label><input type="number" id="Vexit-rocket" step="any" required class="input-field" placeholder="m/s"><button type="button" class="use-stored-button" onclick="useStoredValue('Vexit-rocket','V_exit')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="Aexit-rocket">\(A_{exit}\) (Exit Area)</label><input type="number" id="Aexit-rocket" step="any" class="input-field" placeholder="m² (optional)"><button type="button" class="use-stored-button" onclick="useStoredValue('Aexit-rocket','A_exit')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="Pexit-rocket">\(P_{exit}\) (Exit Pressure)</label><input type="number" id="Pexit-rocket" step="any" class="input-field" placeholder="Pa (optional)"><button type="button" class="use-stored-button" onclick="useStoredValue('Pexit-rocket','P_exit')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="Pamb-rocket">\(P_{ambient}\) (Ambient Pressure)</label><input type="number" id="Pamb-rocket" step="any" class="input-field" placeholder="Pa (optional)"><button type="button" class="use-stored-button" onclick="useStoredValue('Pamb-rocket','P_ambient')">Use Stored</button></div>
+                <button type="submit" class="calc-button">Calculate Rocket Thrust</button>
+            </form>
+            <div id="T_rocket_result" class="result-box w-full max-w-xs"></div>
+            <button onclick="showView('rocket-menu')" class="back-button">← Back to Rocket Engine</button>
+        </div>
+
+        <!-- Propeller Power Calculator View (P = P_o * (rho/rho_o)^1.2) -->
+        <div id="P_prop_calc" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">Propeller Power (P)</h2>
+            <p class="text-center text-gray-400">$$P = P_o \left(\frac{\rho}{\rho_o}\right)^{1.2}$$</p>
+            <form id="P_prop_form" onsubmit="event.preventDefault(); calculatePropPower()" class="w-full max-w-xs space-y-4">
+                <div class="w-full input-row"><label for="P0-prop">\(P_o\) (Reference Power)</label><input type="number" id="P0-prop" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('P0-prop','P_o')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="rho-prop">\(\rho\) (Current Density)</label><input type="number" id="rho-prop" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('rho-prop','rho')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="rho0-prop">\(\rho_o\) (Reference Density)</label><input type="number" id="rho0-prop" step="any" class="input-field" placeholder="e.g., 1.225"><button type="button" class="use-stored-button" onclick="useStoredValue('rho0-prop','rho_o')">Use Stored</button></div>
+                <button type="submit" class="calc-button">Calculate P</button>
+            </form>
+            <div id="P_prop_result" class="result-box w-full max-w-xs"></div>
+            <button onclick="showView('prop-menu')" class="back-button">← Back to Propeller</button>
+        </div>
+
+        <!-- Jet Thrust at Altitude (Troposphere) Calculator View (T = T_o * (rho/rho_o)^0.9) -->
+        <div id="T_jet_alt_calc" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">Jet Thrust at Altitude (T)</h2>
+            <p class="text-center text-gray-400">Troposphere: $$T = T_o \left(\frac{\rho}{\rho_o}\right)^{0.9}$$ Stratosphere: $$T = T_{11} \left(\frac{\rho}{\rho_{11}}\right)$$</p>
+            <form id="T_jet_alt_form" onsubmit="event.preventDefault(); calculateJetThrustAltitude()" class="w-full max-w-xs space-y-4">
+                <div class="w-full input-row"><label for="layer-select" style="min-width:auto;">Layer:</label><select id="layer-select" style="flex:1 1 10rem; padding:0.75rem; background-color:#3d444d; color:white; border:1px solid #444c56; border-radius:0.5rem;"><option value="tropo">Troposphere (0.9 exponent)</option><option value="strato">Stratosphere (linear)</option></select></div>
+                <div class="w-full input-row"><label for="T0-jalt">\(T_o\) or \(T_{11}\) (Ref. Thrust)</label><input type="number" id="T0-jalt" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('T0-jalt','T_o')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="rho-jalt">\(\rho\) (Current Density)</label><input type="number" id="rho-jalt" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('rho-jalt','rho')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="rho0-jalt">\(\rho_o\) or \(\rho_{11}\) (Ref. Density)</label><input type="number" id="rho0-jalt" step="any" class="input-field" placeholder="e.g., 1.225"><button type="button" class="use-stored-button" onclick="useStoredValue('rho0-jalt','rho_ref')">Use Stored</button></div>
+                <button type="submit" class="calc-button">Calculate Jet Thrust</button>
+            </form>
+            <div id="T_jet_alt_result" class="result-box w-full max-w-xs"></div>
+            <button onclick="showView('jet-menu')" class="back-button">← Back to Jet Engine</button>
+        </div>
+
+        <!-- Rocket Thrust from Chamber Calculator View (T = P_chamber * A_throat * C_F) -->
+        <div id="T_rocket_chamber_calc" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">Rocket Thrust from Chamber (T)</h2>
+            <p class="text-center text-gray-400">$$T = P_{chamber} \cdot A_{throat} \cdot C_F$$</p>
+            <form id="T_rocket_chamber_form" onsubmit="event.preventDefault(); calculateRocketThrustChamber()" class="w-full max-w-xs space-y-4">
+                <div class="w-full input-row"><label for="Pcham-rocket">\(P_{chamber}\) (Chamber Pressure)</label><input type="number" id="Pcham-rocket" step="any" required class="input-field" placeholder="Pa"><button type="button" class="use-stored-button" onclick="useStoredValue('Pcham-rocket','P_chamber')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="Athroat-rocket">\(A_{throat}\) (Throat Area)</label><input type="number" id="Athroat-rocket" step="any" required class="input-field" placeholder="m²"><button type="button" class="use-stored-button" onclick="useStoredValue('Athroat-rocket','A_throat')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="CF-rocket">\(C_F\) (Discharge Coefficient)</label><input type="number" id="CF-rocket" step="any" required class="input-field" placeholder="e.g., 1.5"><button type="button" class="use-stored-button" onclick="useStoredValue('CF-rocket','C_F')">Use Stored</button></div>
+                <button type="submit" class="calc-button">Calculate Thrust</button>
+            </form>
+            <div id="T_rocket_chamber_result" class="result-box w-full max-w-xs"></div>
+            <button onclick="showView('rocket-menu')" class="back-button">← Back to Rocket Engine</button>
+        </div>
+
+        <!-- Discharge Coefficient Calculator View (C_F formula) -->
+        <div id="CF_calc" class="view hidden space-y-6 centered-form-content">
+            <h2 class="text-xl font-semibold text-center text-green-400">Discharge Coefficient (\(C_F\))</h2>
+            <p class="text-center text-gray-400">$$C_F = \sqrt{\left(\frac{2\gamma}{\gamma-1}\right)^2 \left(\frac{2}{\gamma+1}\right)^{\frac{\gamma+1}{\gamma-1}} \left(1-\frac{P_{exit}}{P_{chamber}}\right)^{\frac{\gamma-1}{\gamma}}}$$</p>
+            <form id="CF_form" onsubmit="event.preventDefault(); calculateDischargeCoefficient()" class="w-full max-w-xs space-y-4">
+                <div class="w-full input-row"><label for="gamma-cf">\(\gamma\) (Ratio of Specific Heats)</label><input type="number" id="gamma-cf" step="any" class="input-field" placeholder="default 1.4"><button type="button" class="use-stored-button" onclick="useStoredValue('gamma-cf','gamma')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="Pexit-cf">\(P_{exit}\) (Exit Pressure)</label><input type="number" id="Pexit-cf" step="any" required class="input-field" placeholder="Pa"><button type="button" class="use-stored-button" onclick="useStoredValue('Pexit-cf','P_exit')">Use Stored</button></div>
+                <div class="w-full input-row"><label for="Pcham-cf">\(P_{chamber}\) (Chamber Pressure)</label><input type="number" id="Pcham-cf" step="any" required class="input-field" placeholder="Pa"><button type="button" class="use-stored-button" onclick="useStoredValue('Pcham-cf','P_chamber')">Use Stored</button></div>
+                <button type="submit" class="calc-button">Calculate \(C_F\)</button>
+            </form>
+            <div id="CF_result" class="result-box w-full max-w-xs"></div>
+            <button onclick="showView('rocket-menu')" class="back-button">← Back to Rocket Engine</button>
         </div>
     </div>
 
@@ -686,6 +887,155 @@
             displayResult('L_result', `$$L = \tfrac{1}{2} \\cdot ${rho} \\cdot ${V}^2 \\cdot ${S} \\cdot ${CL} = ${L.toFixed(5)}$$`, L, 'L');
         }
 
+        // --- New Propulsion & Aerodynamic Equations ---
+        function calculateDynamicPressure() {
+            const rho = getVal('rho-q');
+            const V = getVal('V-q');
+            if (isNaN(rho) || isNaN(V)) { displayResult('q_result', `$$q = \tfrac{1}{2} \rho V^2$$`, NaN); return; }
+            const q = 0.5 * rho * Math.pow(V, 2);
+            displayResult('q_result', `$$q = \tfrac{1}{2} \\cdot ${rho} \\cdot ${V}^2 = ${q.toFixed(5)}$$`, q, 'q');
+        }
+
+        function calculateDrag() {
+            const rho = getVal('rho-d');
+            const V = getVal('V-d');
+            const S = getVal('S-d');
+            const CD = getVal('CD-d');
+            if (isNaN(rho) || isNaN(V) || isNaN(S) || isNaN(CD)) { displayResult('D_result', `$$D = \tfrac{1}{2} \rho V^2 S C_D$$`, NaN); return; }
+            const D = 0.5 * rho * Math.pow(V, 2) * S * CD;
+            displayResult('D_result', `$$D = \tfrac{1}{2} \\cdot ${rho} \\cdot ${V}^2 \\cdot ${S} \\cdot ${CD} = ${D.toFixed(5)}$$`, D, 'D');
+        }
+
+        function calculatePropEfficiency() {
+            const T = getVal('T-eta');
+            const V = getVal('V-eta');
+            const P = getVal('P-eta');
+            if (isNaN(T) || isNaN(V) || isNaN(P) || P === 0) { displayResult('eta_p_result', `$$\eta_p = \frac{T \\cdot V}{P_{shaft}}$$`, NaN); return; }
+            const eta_p = (T * V) / P;
+            displayResult('eta_p_result', `$$\eta_p = \frac{${T} \\cdot ${V}}{${P}} = ${eta_p.toFixed(5)}$$`, eta_p, 'eta_p');
+        }
+
+           function calculatePropThrust() {
+               const eta_p = getVal('eta-prop');
+               const P = getVal('Pshaft-prop');
+               const V = getVal('V-prop');
+               if (isNaN(eta_p) || isNaN(P) || isNaN(V) || V === 0) { displayResult('T_prop_result', `$$T = \frac{\eta_p \\cdot P_{shaft}}{V}$$`, NaN); return; }
+               const T = (eta_p * P) / V;
+               displayResult('T_prop_result', `$$T = \frac{${eta_p} \\cdot ${P}}{${V}} = ${T.toFixed(5)}$$`, T, 'T');
+           }
+
+        function calculateJetThrust() {
+            const mdot = getVal('mdot-jet');
+            const Vexit = getVal('Vexit-jet');
+            const Vinlet = getVal('Vinlet-jet');
+            const Aexit = parseFloat(document.getElementById('Aexit-jet').value);
+            const Pexit = parseFloat(document.getElementById('Pexit-jet').value);
+            const Pamb = parseFloat(document.getElementById('Pamb-jet').value);
+
+            if (isNaN(mdot) || isNaN(Vexit) || isNaN(Vinlet)) { displayResult('T_jet_result', `$$T = \dot{m}(V_{exit} - V_{inlet}) + A_{exit}(P_{exit} - P_{ambient})$$`, NaN); return; }
+
+            let T = mdot * (Vexit - Vinlet);
+            let pressureTerm = '';
+            
+            if (!isNaN(Aexit) && !isNaN(Pexit) && !isNaN(Pamb)) {
+                const pressTerm = Aexit * (Pexit - Pamb);
+                T += pressTerm;
+                pressureTerm = `\\n$$+ A_{exit}(P_{exit} - P_{ambient}) = ${Aexit} \\cdot (${Pexit} - ${Pamb}) = ${pressTerm.toFixed(5)}$$`;
+            }
+
+            const formula = `$$T = \dot{m}(V_{exit} - V_{inlet}) = ${mdot} \\cdot (${Vexit} - ${Vinlet}) = ${(mdot * (Vexit - Vinlet)).toFixed(5)}$$${pressureTerm}`;
+            displayResult('T_jet_result', formula, T, 'T_jet');
+        }
+
+        function calculateRocketThrust() {
+            const mdot = getVal('mdot-rocket');
+            const Vexit = getVal('Vexit-rocket');
+            const Aexit = parseFloat(document.getElementById('Aexit-rocket').value);
+            const Pexit = parseFloat(document.getElementById('Pexit-rocket').value);
+            const Pamb = parseFloat(document.getElementById('Pamb-rocket').value);
+
+            if (isNaN(mdot) || isNaN(Vexit)) { displayResult('T_rocket_result', `$$T = \dot{m} V_{exit} + A_{exit}(P_{exit} - P_{ambient})$$`, NaN); return; }
+
+            let T = mdot * Vexit;
+            let pressureTerm = '';
+            
+            if (!isNaN(Aexit) && !isNaN(Pexit) && !isNaN(Pamb)) {
+                const pressTerm = Aexit * (Pexit - Pamb);
+                T += pressTerm;
+                pressureTerm = `\\n$$+ A_{exit}(P_{exit} - P_{ambient}) = ${Aexit} \\cdot (${Pexit} - ${Pamb}) = ${pressTerm.toFixed(5)}$$`;
+            }
+
+            const formula = `$$T = \dot{m} V_{exit} = ${mdot} \\cdot ${Vexit} = ${(mdot * Vexit).toFixed(5)}$$${pressureTerm}`;
+            displayResult('T_rocket_result', formula, T, 'T_rocket');
+        }
+
+        function calculatePropPower() {
+            let P0 = getVal('P0-prop');
+            const rho = getVal('rho-prop');
+            let rho0 = getVal('rho0-prop');
+            
+            if (isNaN(P0) || isNaN(rho)) { displayResult('P_prop_result', `$$P = P_o \\left(\\frac{\\rho}{\\rho_o}\\right)^{1.2}$$`, NaN); return; }
+            if (isNaN(rho0)) rho0 = 1.225;
+            
+            if (rho0 === 0) { displayResult('P_prop_result', `$$P = P_o \\left(\\frac{\\rho}{\\rho_o}\\right)^{1.2}$$`, NaN); return; }
+            
+            const ratio = rho / rho0;
+            const P = P0 * Math.pow(ratio, 1.2);
+            displayResult('P_prop_result', `$$P = ${P0} \\cdot \\left(\\frac{${rho}}{${rho0}}\\right)^{1.2} = ${P.toFixed(5)}$$`, P, 'P');
+        }
+
+        function calculateJetThrustAltitude() {
+            const layer = document.getElementById('layer-select').value;
+            const T0 = getVal('T0-jalt');
+            const rho = getVal('rho-jalt');
+            let rho0 = getVal('rho0-jalt');
+            
+            if (isNaN(T0) || isNaN(rho)) { displayResult('T_jet_alt_result', `$$T = T_o \\left(\\frac{\\rho}{\\rho_o}\\right)^n$$`, NaN); return; }
+            if (isNaN(rho0)) rho0 = 1.225;
+            
+            if (rho0 === 0) { displayResult('T_jet_alt_result', `$$T = T_o \\left(\\frac{\\rho}{\\rho_o}\\right)^n$$`, NaN); return; }
+            
+            let T, formula;
+            if (layer === 'tropo') {
+                const ratio = rho / rho0;
+                T = T0 * Math.pow(ratio, 0.9);
+                formula = `$$T = ${T0} \\cdot \\left(\\frac{${rho}}{${rho0}}\\right)^{0.9} = ${T.toFixed(5)}$$`;
+            } else {
+                const ratio = rho / rho0;
+                T = T0 * ratio;
+                formula = `$$T = ${T0} \\cdot \\frac{${rho}}{${rho0}} = ${T.toFixed(5)}$$`;
+            }
+            displayResult('T_jet_alt_result', formula, T, 'T_jet_alt');
+        }
+
+        function calculateRocketThrustChamber() {
+            const Pcham = getVal('Pcham-rocket');
+            const Athroat = getVal('Athroat-rocket');
+            const CF = getVal('CF-rocket');
+            
+            if (isNaN(Pcham) || isNaN(Athroat) || isNaN(CF)) { displayResult('T_rocket_chamber_result', `$$T = P_{chamber} \\cdot A_{throat} \\cdot C_F$$`, NaN); return; }
+            
+            const T = Pcham * Athroat * CF;
+            displayResult('T_rocket_chamber_result', `$$T = ${Pcham} \\cdot ${Athroat} \\cdot ${CF} = ${T.toFixed(5)}$$`, T, 'T_chamber');
+        }
+
+        function calculateDischargeCoefficient() {
+            let gamma = getVal('gamma-cf');
+            const Pexit = getVal('Pexit-cf');
+            const Pcham = getVal('Pcham-cf');
+            
+            if (isNaN(Pexit) || isNaN(Pcham)) { displayResult('CF_result', `$$C_F = \\sqrt{...}$$`, NaN); return; }
+            if (isNaN(gamma)) gamma = 1.4;
+            if (Pcham === 0 || Pexit >= Pcham) { displayResult('CF_result', `$$C_F = \\sqrt{...}$$`, NaN); return; }
+            
+            const part1 = Math.pow(2 * gamma / (gamma - 1), 2);
+            const part2 = Math.pow(2 / (gamma + 1), (gamma + 1) / (gamma - 1));
+            const part3 = Math.pow(1 - Pexit / Pcham, (gamma - 1) / gamma);
+            const CF = Math.sqrt(part1 * part2 * part3);
+            
+            displayResult('CF_result', `$$C_F = \\sqrt{\\left(\\frac{2\\gamma}{\\gamma-1}\\right)^2 \\left(\\frac{2}{\\gamma+1}\\right)^{\\frac{\\gamma+1}{\\gamma-1}} \\left(1-\\frac{P_{exit}}{P_{chamber}}\\right)^{\\frac{\\gamma-1}{\\gamma}}} = ${CF.toFixed(5)}$$`, CF, 'C_F');
+        }
+
         // --- KaTeX Configuration ---
         function renderMathInElement(element) {
             if (window.renderMathInElement) {
@@ -707,3 +1057,11 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
