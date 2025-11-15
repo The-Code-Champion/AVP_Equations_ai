@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVP Equations - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+            color: #c9d1d9;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        .container {
+            text-align: center;
+            max-width: 40rem;
+            background-color: #161b22;
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid #374151;
+        }
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #4595b0;
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            color: #8b949e;
+            margin-bottom: 2rem;
+        }
+        .description {
+            font-size: 1rem;
+            color: #c9d1d9;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #4595b0;
+            color: white;
+            font-weight: 700;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.3s, transform 0.2s;
+            text-decoration: none;
+            box-shadow: 0 10px 15px -3px rgba(69, 149, 176, 0.4);
+        }
+        .cta-button:hover {
+            background-color: #367a8f;
+            transform: translateY(-2px);
+        }
+        .cta-button:active {
+            transform: translateY(0);
+        }
+        .features {
+            text-align: left;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid #374151;
+        }
+        .features h3 {
+            font-size: 1.1rem;
+            color: #4595b0;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li {
+            padding: 0.5rem 0;
+            color: #8b949e;
+            display: flex;
+            align-items: center;
+        }
+        .feature-list li:before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 0.75rem;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AVP Equations</h1>
+        <p class="subtitle">Aerodynamic & Atmospheric Calculation Suite</p>
+        
+        <p class="description">
+            A comprehensive engineering calculator for solving aerodynamic, atmospheric, and thermodynamic equations used in aircraft design and performance analysis.
+        </p>
+
+        <a href="page.html" class="cta-button">Open Calculator</a>
+
+        <div class="features">
+            <h3>Available Calculations</h3>
+            <ul class="feature-list">
+                <li>Aerodynamic Coefficients (C<sub>D</sub>, C<sub>L</sub>, K)</li>
+                <li>Atmospheric Models (Troposphere, Stratosphere)</li>
+                <li>Thermodynamic Properties (Pressure, Speed of Sound)</li>
+                <li>Flight Characteristics (Velocity, Mach Number, Lift)</li>
+                <li>Result Storage & Reuse for Sequential Calculations</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
