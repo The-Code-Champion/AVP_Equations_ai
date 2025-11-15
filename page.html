@@ -268,7 +268,10 @@
             <div class="menu-row">
                 <button onclick="showView('eta_p_calc')" class="menu-button">Prop Efficiency (\(\eta_p\))</button>
                 <button onclick="showView('P_prop_calc')" class="menu-button">Prop Power (P)</button>
-                   <button onclick="showView('T_prop_calc')" class="menu-button">Prop Thrust (T)</button>
+                <button onclick="showView('T_prop_calc')" class="menu-button">Prop Thrust (T)</button>
+                <button onclick="showView('phi_calc')" class="menu-button">Helix Angle (\(\phi\))</button>
+                <button onclick="showView('beta_calc')" class="menu-button">Pitch Angle (\(\beta\))</button>
+                <button onclick="showView('J_calc')" class="menu-button">Advance Ratio (J)</button>
             </div>
             <button onclick="showView('menu-view')" class="back-button" style="width:auto; margin-top:1rem;">← Back to Main Menu</button>
         </div>
@@ -535,6 +538,48 @@
                    <button type="submit" class="calc-button">Calculate T</button>
                </form>
                <div id="T_prop_result" class="result-box w-full max-w-xs"></div>
+               <button onclick="showView('prop-menu')" class="back-button">← Back to Propeller</button>
+           </div>
+
+           <!-- Helix Angle Calculator View (phi = atan(V / (r * omega))) -->
+           <div id="phi_calc" class="view hidden space-y-6 centered-form-content">
+               <h2 class="text-xl font-semibold text-center text-green-400">Helix Angle (\(\phi\))</h2>
+               <p class="text-center text-gray-400">$$\phi = \arctan\left(\frac{V}{r \cdot \omega}\right)$$ (returns radians and degrees)</p>
+               <form id="phi_form" onsubmit="event.preventDefault(); calculatePhi()" class="w-full max-w-xs space-y-4">
+                   <div class="w-full input-row"><label for="V-phi">\(V\) (Axial Velocity)</label><input type="number" id="V-phi" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('V-phi','V')">Use Stored</button></div>
+                   <div class="w-full input-row"><label for="r-phi">\(r\) (Radius)</label><input type="number" id="r-phi" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('r-phi','r')">Use Stored</button></div>
+                   <div class="w-full input-row"><label for="omega-phi">\(\omega\) (Angular Speed)</label><input type="number" id="omega-phi" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('omega-phi','omega')">Use Stored</button></div>
+                   <button type="submit" class="calc-button">Calculate \(\phi\)</button>
+               </form>
+               <div id="phi_result" class="result-box w-full max-w-xs"></div>
+               <button onclick="showView('prop-menu')" class="back-button">← Back to Propeller</button>
+           </div>
+
+           <!-- Advance Ratio Calculator View (J = V / (n * D)) -->
+           <div id="J_calc" class="view hidden space-y-6 centered-form-content">
+               <h2 class="text-xl font-semibold text-center text-green-400">Advance Ratio (J)</h2>
+               <p class="text-center text-gray-400">$$J = \frac{V}{n \cdot D}$$ where \(n\) is propeller rotation in rev/s (or provide RPM which will be converted).</p>
+               <form id="J_form" onsubmit="event.preventDefault(); calculateAdvanceRatio()" class="w-full max-w-xs space-y-4">
+                   <div class="w-full input-row"><label for="V-j">\(V\) (Axial Velocity)</label><input type="number" id="V-j" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('V-j','V')">Use Stored</button></div>
+                   <div class="w-full input-row"><label for="n-j">\(n\) (Rev/s)</label><input type="number" id="n-j" step="any" class="input-field" placeholder="rev/s (optional)"><button type="button" class="use-stored-button" onclick="useStoredValue('n-j','n')">Use Stored</button></div>
+                   <div class="w-full input-row"><label for="rpm-j">or RPM</label><input type="number" id="rpm-j" step="any" class="input-field" placeholder="RPM (optional)"></div>
+                   <div class="w-full input-row"><label for="D-j">\(D\) (Diameter)</label><input type="number" id="D-j" step="any" required class="input-field" placeholder="meters"><button type="button" class="use-stored-button" onclick="useStoredValue('D-j','D')">Use Stored</button></div>
+                   <button type="submit" class="calc-button">Calculate J</button>
+               </form>
+               <div id="J_result" class="result-box w-full max-w-xs"></div>
+               <button onclick="showView('prop-menu')" class="back-button">← Back to Propeller</button>
+           </div>
+
+           <!-- Pitch Angle Calculator View (beta = phi + alpha) -->
+           <div id="beta_calc" class="view hidden space-y-6 centered-form-content">
+               <h2 class="text-xl font-semibold text-center text-green-400">Pitch Angle (\(\beta\))</h2>
+               <p class="text-center text-gray-400">$$\beta = \phi + \alpha$$ (angles in degrees)</p>
+               <form id="beta_form" onsubmit="event.preventDefault(); calculateBeta()" class="w-full max-w-xs space-y-4">
+                   <div class="w-full input-row"><label for="phi-beta">\(\phi\) (Helix Angle, degrees)</label><input type="number" id="phi-beta" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('phi-beta','phi')">Use Stored</button></div>
+                   <div class="w-full input-row"><label for="alpha-beta">\(\alpha\) (Angle of Attack, degrees)</label><input type="number" id="alpha-beta" step="any" required class="input-field"><button type="button" class="use-stored-button" onclick="useStoredValue('alpha-beta','alpha')">Use Stored</button></div>
+                   <button type="submit" class="calc-button">Calculate \(\beta\)</button>
+               </form>
+               <div id="beta_result" class="result-box w-full max-w-xs"></div>
                <button onclick="showView('prop-menu')" class="back-button">← Back to Propeller</button>
            </div>
 
@@ -923,6 +968,39 @@
                const T = (eta_p * P) / V;
                displayResult('T_prop_result', `$$T = \frac{${eta_p} \\cdot ${P}}{${V}} = ${T.toFixed(5)}$$`, T, 'T');
            }
+
+        function calculatePhi() {
+            const V = getVal('V-phi');
+            const r = getVal('r-phi');
+            const omega = getVal('omega-phi');
+            if (isNaN(V) || isNaN(r) || isNaN(omega) || (r * omega) === 0) { displayResult('phi_result', `$$\phi = arctan\\left(\\frac{V}{r \\cdot \\omega}\\right)$$`, NaN); return; }
+            const denom = r * omega;
+            const phi_rad = Math.atan(V / denom);
+            const phi_deg = phi_rad * (180 / Math.PI);
+            displayResult('phi_result', `$$\phi_{rad} = arctan\\left(\\frac{${V}}{${r} \\cdot ${omega}}\\right) = ${phi_rad.toFixed(6)}\\ \text{rad}\\\\\n\\phi_{deg} = ${(phi_deg).toFixed(4)}\\ ^{\\circ}$$`, phi_deg, 'phi');
+        }
+
+        function calculateBeta() {
+            const phi = getVal('phi-beta');
+            const alpha = getVal('alpha-beta');
+            if (isNaN(phi) || isNaN(alpha)) { displayResult('beta_result', `$$\beta = \\phi + \\alpha$$`, NaN); return; }
+            const beta = phi + alpha;
+            displayResult('beta_result', `$$\\beta = ${phi} + ${alpha} = ${beta.toFixed(4)} \\ ^{\\circ}$$`, beta, 'beta');
+        }
+
+        function calculateAdvanceRatio() {
+            const V = getVal('V-j');
+            let n = getVal('n-j');
+            const rpm = parseFloat(document.getElementById('rpm-j').value);
+            const D = getVal('D-j');
+            if (!isNaN(rpm) && isNaN(n)) {
+                // convert RPM to rev/s
+                n = rpm / 60.0;
+            }
+            if (isNaN(V) || isNaN(n) || isNaN(D) || (n * D) === 0) { displayResult('J_result', `$$J = \\frac{V}{n \\cdot D}$$`, NaN); return; }
+            const J = V / (n * D);
+            displayResult('J_result', `$$J = \\frac{${V}}{${n} \\cdot ${D}} = ${J.toFixed(6)}$$`, J, 'J');
+        }
 
         function calculateJetThrust() {
             const mdot = getVal('mdot-jet');
